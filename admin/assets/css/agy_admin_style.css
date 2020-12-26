@@ -1,0 +1,16 @@
+#agy-save-changes-btn{
+    color: #fff;
+    background: rgba(251, 144, 57, .7);
+    border: 1px solid rgba(251, 144, 57, .7);
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: 500;
+}
+#agy-save-changes-btn:hover{
+    color: #fff;
+    background: rgba(251, 144, 57, 1);
+    border: 1px solid rgba(251, 144, 57, 1);
+}
+#agy-save-changes-btn:focus{
+    box-shadow:none;
+}
