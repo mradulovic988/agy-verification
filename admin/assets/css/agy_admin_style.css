@@ -1,16 +1,62 @@
 #agy-save-changes-btn{
-    color: #fff;
-    background: rgba(251, 144, 57, .7);
-    border: 1px solid rgba(251, 144, 57, .7);
+    color: #b73225;
+    background: transparent;
+    border: 1px solid rgba(183, 50, 37, .3);
     border-radius: 0;
     font-size: 16px;
     font-weight: 500;
 }
-#agy-save-changes-btn:hover{
-    color: #fff;
-    background: rgba(251, 144, 57, 1);
-    border: 1px solid rgba(251, 144, 57, 1);
+
+#agy-save-changes-btn:hover,
+#agy-save-changes-btn:focus{
+    border: 1px solid rgba(183, 50, 37, 1);
+    background: rgba(183, 50, 37, .1);
 }
+
 #agy-save-changes-btn:focus{
     box-shadow:none;
+}
+
+.agy-tab {
+    overflow: hidden;
+    border: 1px solid rgba(183, 50, 37, .3);
+}
+
+.agy-tab button {
+    width: 25%;
+    color: #b73225;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    font-size: 19px;
+    font-weight: 500;
+}
+
+.agy-tab button:hover {
+    border-bottom: 2px solid #b73225;
+    background: rgba(183, 50, 37, .1);
+}
+
+.agy-tab button.agy-active {
+    border-bottom: 2px solid #b73225;
+    background: rgba(183, 50, 37, .1);
+}
+
+.agy-tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid rgba(183, 50, 37, .3);
+    border-top: none;
+}
+
+.agy-tabcontent {
+    animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }

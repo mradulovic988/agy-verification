@@ -25,18 +25,54 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_dashboard() {
 			add_submenu_page(
 				'tools.php',
-				__('Agy', 'agy'),
-				__('Agy', 'agy'),
+				__('Agy Verification', 'agy'),
+				__('Agy Verification', 'agy'),
 				'manage_options',
 				'agy-dashboard',
 				array($this, 'agy_dashboard_page')
 			);
 		}
+		
+		protected function agy_header_tabs() {
+		    ?>
+            <div class="agy-tab">
+                <button id="default-open" class="agy-tablinks" onclick="openTab(event, 'agy-tab1')"><?php _e('General', 'agy') ?></button>
+                <button class="agy-tablinks" onclick="openTab(event, 'agy-tab2')"><?php _e('Text', 'agy') ?></button>
+                <button class="agy-tablinks" onclick="openTab(event, 'agy-tab3')"><?php _e('Design', 'agy') ?></button>
+                <button class="agy-tablinks" onclick="openTab(event, 'agy-tab4')"><?php _e('Docs', 'agy') ?></button>
+            </div>
+            <?php
+        }
+
+        protected function agy_templates() {
+		    ?>
+            <div id="agy-tab1" class="agy-tabcontent">
+                <h3 style="color: #004e7c"><?php _e('General', 'agy') ?></h3>
+                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet.', 'agy') ?></p>
+            </div>
+
+            <div id="agy-tab2" class="agy-tabcontent">
+                <h3 style="color: #004e7c"><?php _e('Text', 'agy') ?></h3>
+                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet.', 'agy') ?></p>
+            </div>
+
+            <div id="agy-tab3" class="agy-tabcontent">
+                <h3 style="color: #004e7c"><?php _e('Design', 'agy') ?></h3>
+                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam.', 'agy') ?></p>
+            </div>
+            <div id="agy-tab4" class="agy-tabcontent">
+                <h3 style="color: #004e7c"><?php _e('Docs', 'agy') ?></h3>
+                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam.', 'agy') ?></p>
+            </div>
+            <?php
+        }
 
 		public function agy_dashboard_page() {
 			?>
-			<style>div#wpwrap{background:#E1F2F7!important}</style>
+			<style>div#wpwrap{background:#dce1e3!important}</style>
 			<div class="wrap">
+                <?php $this->agy_header_tabs(); ?>
+                <?php $this->agy_templates(); ?>
 				<form action="" method="post">
 
 					<?php
@@ -50,11 +86,12 @@ if (!class_exists('Agy_Dashboard')) {
 						true,
 						array('id'=>'agy-save-changes-btn')
 					);
+					wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce');
 					?>
 
 				</form>
 			</div>
-		<?php
+		    <?php
 		}
 	}
 	new Agy_Dashboard();
