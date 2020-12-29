@@ -1,4 +1,4 @@
-=== WP Banner ===
+=== Agy Verification ===
 Contributors: upss1988
 Donate link: https://mlab-studio.com/
 Tags: age verification, age gate, age restriction, age popup, page gate, content warning
