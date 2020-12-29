@@ -7,6 +7,10 @@
     font-weight: 500;
 }
 
+#agy-wrap {
+    max-width: 1200px;
+}
+
 #agy-save-changes-btn:hover,
 #agy-save-changes-btn:focus{
     border: 1px solid rgba(183, 50, 37, 1);

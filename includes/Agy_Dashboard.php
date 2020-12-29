@@ -14,7 +14,8 @@ if (!class_exists('Agy_Dashboard')) {
 		public function __construct() {
 			if (is_admin()){
 				add_action('admin_menu', array($this, 'agy_dashboard'));
-				add_action( 'admin_notices', array( $this, 'agy_show_error_notice' ) );
+				add_action('admin_notices', array($this, 'agy_show_error_notice'));
+				add_action('admin_init', array($this, 'agy_register_settings'));
 			}
 		}
 
@@ -48,21 +49,21 @@ if (!class_exists('Agy_Dashboard')) {
 		    ?>
             <div id="agy-tab1" class="agy-tabcontent">
                 <h3 style="color: #004e7c"><?php _e('General', 'agy') ?></h3>
-                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet.', 'agy') ?></p>
+                <!-- Instantiate a new class for Settings API -->
             </div>
 
             <div id="agy-tab2" class="agy-tabcontent">
                 <h3 style="color: #004e7c"><?php _e('Text', 'agy') ?></h3>
-                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet.', 'agy') ?></p>
+                <!-- Instantiate a new class for Settings API -->
             </div>
 
             <div id="agy-tab3" class="agy-tabcontent">
                 <h3 style="color: #004e7c"><?php _e('Design', 'agy') ?></h3>
-                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam.', 'agy') ?></p>
+                <!-- Instantiate a new class for Settings API -->
             </div>
             <div id="agy-tab4" class="agy-tabcontent">
                 <h3 style="color: #004e7c"><?php _e('Docs', 'agy') ?></h3>
-                <p style="color: #5c5f58"><?php _e('Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam.', 'agy') ?></p>
+                <!-- Instantiate a new class for Settings API -->
             </div>
             <?php
         }
@@ -70,28 +71,69 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_dashboard_page() {
 			?>
 			<style>div#wpwrap{background:#dce1e3!important}</style>
-			<div class="wrap">
+			<div id="agy-wrap" class="wrap">
                 <?php $this->agy_header_tabs(); ?>
                 <?php $this->agy_templates(); ?>
-				<form action="" method="post">
+				<form action="options.php" method="post">
 
 					<?php
-					settings_fields( '' );
-					do_settings_sections( '' );
+					settings_fields( 'agy_settings_fields' );
+					do_settings_sections( 'agy_settings_section' );
 
 					submit_button(
 						__('Save Changes', 'agy'),
-						'primary',
+						'',
 						'agy-save-changes-btn',
 						true,
 						array('id'=>'agy-save-changes-btn')
 					);
-					wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce');
+//					wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce');
 					?>
 
 				</form>
 			</div>
 		    <?php
+		}
+
+		public function agy_register_settings() {
+		    register_setting(
+                'agy_settings_fields',
+                'agy_settings_fields',
+                'agy_sanitize_callback'
+            );
+
+		    add_settings_section(
+                'agy_section_id',
+                'Agy General',
+                array($this, 'agy_settings_section_callback'),
+                'agy_settings_section'
+            );
+
+		    // This is an example field
+		    add_settings_field(
+                'agy_section_id_test',
+                'Test',
+                array($this, 'test'),
+                'agy_settings_section',
+                'agy_section_id'
+            );
+		}
+
+		// This is an example field
+		public function test()
+		{
+			$options = get_option( 'agy_settings_fields' );
+			$is_options_empty = ( ! empty( $options[ 'test' ] ) ? $options[ 'test' ] : '' );
+
+			echo '
+                <textarea id="agy_section_id_test" name="agy_settings_fields[test]" 
+                placeholder="Test" rows="10" cols="100">' .
+			     esc_attr( sanitize_text_field( $is_options_empty ) )
+			     . '</textarea>';
+		}
+
+		public function agy_settings_section_callback() {
+		    return 'Settings section callback text';
 		}
 	}
 	new Agy_Dashboard();
