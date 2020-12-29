@@ -9,7 +9,7 @@
 const openTab = (evt, tabName) => {
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName('agy-tabcontent');
-    for (i = 0; i < tabcontent.length; i++) {
+    for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = 'none';
     }
 

@@ -45,41 +45,33 @@ if (!class_exists('Agy_Dashboard')) {
             <?php
         }
 
-        protected function agy_templates() {
-		    ?>
-            <div id="agy-tab1" class="agy-tabcontent">
-                <h3 style="color: #004e7c"><?php _e('General', 'agy') ?></h3>
-                <!-- Instantiate a new class for Settings API -->
-            </div>
-
-            <div id="agy-tab2" class="agy-tabcontent">
-                <h3 style="color: #004e7c"><?php _e('Text', 'agy') ?></h3>
-                <!-- Instantiate a new class for Settings API -->
-            </div>
-
-            <div id="agy-tab3" class="agy-tabcontent">
-                <h3 style="color: #004e7c"><?php _e('Design', 'agy') ?></h3>
-                <!-- Instantiate a new class for Settings API -->
-            </div>
-            <div id="agy-tab4" class="agy-tabcontent">
-                <h3 style="color: #004e7c"><?php _e('Docs', 'agy') ?></h3>
-                <!-- Instantiate a new class for Settings API -->
-            </div>
-            <?php
-        }
-
 		public function agy_dashboard_page() {
 			?>
 			<style>div#wpwrap{background:#dce1e3!important}</style>
 			<div id="agy-wrap" class="wrap">
                 <?php $this->agy_header_tabs(); ?>
-                <?php $this->agy_templates(); ?>
 				<form action="options.php" method="post">
 
 					<?php
-					settings_fields( 'agy_settings_fields' );
-					do_settings_sections( 'agy_settings_section' );
+					settings_fields( 'agy_settings_fields' ); ?>
 
+                    <div id="agy-tab1" class="agy-tabcontent">
+                        <?php do_settings_sections( 'agy_settings_section_tab1' ); ?>
+                    </div>
+
+                    <div id="agy-tab2" class="agy-tabcontent">
+						<?php do_settings_sections( 'agy_settings_section_tab2' ); ?>
+                    </div>
+
+                    <div id="agy-tab3" class="agy-tabcontent">
+						<?php do_settings_sections( 'agy_settings_section_tab3' ); ?>
+                    </div>
+
+                    <div id="agy-tab4" class="agy-tabcontent">
+						<?php do_settings_sections( 'agy_settings_section_tab4' ); ?>
+                    </div>
+
+                    <?php
 					submit_button(
 						__('Save Changes', 'agy'),
 						'',
@@ -106,30 +98,62 @@ if (!class_exists('Agy_Dashboard')) {
                 'agy_section_id',
                 'Agy General',
                 array($this, 'agy_settings_section_callback'),
-                'agy_settings_section'
+                'agy_settings_section_tab1'
             );
 
-		    // This is an example field
 		    add_settings_field(
-                'agy_section_id_test',
-                'Test',
-                array($this, 'test'),
-                'agy_settings_section',
+                'agy_section_id_age',
+                __('Minimum Age', 'agy'),
+                array($this, 'agy_section_id_age'),
+                'agy_settings_section_tab1',
                 'agy_section_id'
             );
+
+		    add_settings_field(
+                'agy_section_id_exit_url',
+                __('Exit URL', 'agy'),
+                array($this, 'agy_section_id_exit_url'),
+                'agy_settings_section_tab1',
+                'agy_section_id'
+            );
+
+			add_settings_field(
+				'agy_section_id_cookie_lifetime',
+				__('Cookie Lifetime ( in days )', 'agy'),
+				array($this, 'agy_section_id_cookie_lifetime'),
+				'agy_settings_section_tab1',
+				'agy_section_id'
+			);
 		}
 
-		// This is an example field
-		public function test()
-		{
+		public function agy_section_id_age() {
 			$options = get_option( 'agy_settings_fields' );
-			$is_options_empty = ( ! empty( $options[ 'test' ] ) ? $options[ 'test' ] : '' );
+			$is_options_empty = ( ! empty( $options[ 'age' ] ) ? $options[ 'age' ] : '' );
 
 			echo '
-                <textarea id="agy_section_id_test" name="agy_settings_fields[test]" 
-                placeholder="Test" rows="10" cols="100">' .
-			     esc_attr( sanitize_text_field( $is_options_empty ) )
-			     . '</textarea>';
+                <input type="number" id="agy-age" 
+                class="agy-settings-field" name="agy_settings_fields[age]" 
+                value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
+		}
+
+        public function agy_section_id_exit_url() {
+			$options = get_option( 'agy_settings_fields' );
+			$is_options_empty = ( ! empty( $options[ 'exit_url' ] ) ? $options[ 'exit_url' ] : '' );
+
+			echo '
+                <input type="url" id="agy-exit-url" 
+                class="agy-settings-field" name="agy_settings_fields[exit_url]" 
+                placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
+		}
+
+		public function agy_section_id_cookie_lifetime() {
+			$options = get_option( 'agy_settings_fields' );
+			$is_options_empty = ( ! empty( $options[ 'cookie_lifetime' ] ) ? $options[ 'cookie_lifetime' ] : '' );
+
+			echo '
+                <input type="number" id="agy-cookie-lifetime" 
+                class="agy-settings-field" name="agy_settings_fields[cookie_lifetime]" 
+                value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
 		}
 
 		public function agy_settings_section_callback() {
