@@ -52,8 +52,7 @@ if (!class_exists('Agy_Dashboard')) {
                 <?php $this->agy_header_tabs(); ?>
 				<form action="options.php" method="post">
 
-					<?php
-					settings_fields( 'agy_settings_fields' ); ?>
+					<?php settings_fields( 'agy_settings_fields' ); ?>
 
                     <div id="agy-tab1" class="agy-tabcontent">
                         <?php do_settings_sections( 'agy_settings_section_tab1' ); ?>
@@ -126,34 +125,30 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 		}
 
-		public function agy_section_id_age() {
-			$options = get_option( 'agy_settings_fields' );
-			$is_options_empty = ( ! empty( $options[ 'age' ] ) ? $options[ 'age' ] : '' );
+		protected function options_check($id): string {
+			$options = get_option('agy_settings_fields');
+			return (!empty($options[$id]) ? $options[$id] : '');
+		}
 
+		public function agy_section_id_age() {
 			echo '
                 <input type="number" id="agy-age" 
                 class="agy-settings-field" name="agy_settings_fields[age]" 
-                value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('age'))).'">';
 		}
 
         public function agy_section_id_exit_url() {
-			$options = get_option( 'agy_settings_fields' );
-			$is_options_empty = ( ! empty( $options[ 'exit_url' ] ) ? $options[ 'exit_url' ] : '' );
-
 			echo '
                 <input type="url" id="agy-exit-url" 
                 class="agy-settings-field" name="agy_settings_fields[exit_url]" 
-                placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
+                placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($this->options_check('exit_url'))).'">';
 		}
 
 		public function agy_section_id_cookie_lifetime() {
-			$options = get_option( 'agy_settings_fields' );
-			$is_options_empty = ( ! empty( $options[ 'cookie_lifetime' ] ) ? $options[ 'cookie_lifetime' ] : '' );
-
 			echo '
                 <input type="number" id="agy-cookie-lifetime" 
                 class="agy-settings-field" name="agy_settings_fields[cookie_lifetime]" 
-                value="'.esc_attr__(sanitize_text_field($is_options_empty)).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('cookie_lifetime'))).'">';
 		}
 
 		public function agy_settings_section_callback() {
