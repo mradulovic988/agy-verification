@@ -20,7 +20,7 @@ if (!class_exists('Agy_Dashboard')) {
 		}
 
 		public function agy_show_error_notice() {
-		    settings_errors();
+		    settings_errors(); // CHECK THIS
         }
 
 		public function agy_dashboard() {
@@ -131,6 +131,14 @@ if (!class_exists('Agy_Dashboard')) {
 				'agy_settings_section_tab1',
 				'agy_section_id'
 			);
+
+			add_settings_field(
+				'agy_section_id_debug_mode',
+				__('Activate Debug mode', 'agy'),
+				array($this, 'agy_section_id_debug_mode'),
+				'agy_settings_section_tab1',
+				'agy_section_id'
+			);
 		}
 
 		public function agy_settings_section_callback() {
@@ -144,7 +152,7 @@ if (!class_exists('Agy_Dashboard')) {
 		}
 
 		protected function option_check_radio_btn($id): string {
-			$options = get_option( 'agy_settings_fields' );
+			$options = get_option('agy_settings_fields');
 			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
 		}
 
@@ -168,13 +176,18 @@ if (!class_exists('Agy_Dashboard')) {
 		}
 
 		public function agy_section_id_unregister_user() {
-
-            echo '<label class="agy-switch" for="agy-unregister-user">';
-            echo '<input type="checkbox" id="agy-unregister-user" 
+            echo '<label class="agy-switch" for="agy-unregister-user"><input type="checkbox" id="agy-unregister-user" 
                 class="agy-switch-input" name="agy_settings_fields[unregister_user]" 
-                value="1" '.$this->option_check_radio_btn('unregister_user').'>';
-			echo '<span class="agy-slider agy-round"></span>';
-			echo '</label>';
+                value="1" '.$this->option_check_radio_btn('unregister_user').'>
+                <span class="agy-slider agy-round"></span></label>';
+		}
+
+		public function agy_section_id_debug_mode() {
+            echo '<label class="agy-switch" for="agy-debug-mode"><input type="checkbox" id="agy-debug-mode" 
+                class="agy-switch-input" name="agy_settings_fields[debug_mode]" 
+                value="1" '.$this->option_check_radio_btn('debug_mode').'>
+			    <span class="agy-slider agy-round"></span></label>
+			    <small class="agy-field-desc">'.__('Turn off the cookie for testing purpose', 'agy').'</small>';
 		}
 	}
 	new Agy_Dashboard();
