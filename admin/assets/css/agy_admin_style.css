@@ -7,6 +7,10 @@
     font-weight: 500;
 }
 
+img.agy-logo {
+    width: 120px;
+}
+
 #agy-wrap {
     max-width: 1200px;
 }
@@ -24,6 +28,14 @@
 .agy-tab {
     overflow: hidden;
     border: 1px solid rgba(183, 50, 37, .3);
+}
+
+.agy-tab-header {
+    overflow: hidden;
+    border-left: 1px solid rgba(183, 50, 37, .3);
+    border-right: 1px solid rgba(183, 50, 37, .3);
+    border-top: 1px solid rgba(183, 50, 37, .3);
+    padding: 5px;
 }
 
 .agy-tab button {
@@ -57,11 +69,11 @@
 }
 
 .agy-tabcontent {
-    animation: showUpEffect 1s;
+    animation: showUpEffect .7s;
 }
 
 @keyframes showUpEffect {
-    from {opacity: .3;}
+    from {opacity: 0;}
     to {opacity: 1;}
 }
 
@@ -72,13 +84,28 @@
     border-bottom: 1px solid rgba(183, 50, 37, .3);
 }
 
-div.agy-tabcontent input.agy-settings-field {
+div.agy-tabcontent input.agy-settings-color {
+    height: 30px;
     width: 300px;
     border: 1px solid rgba(183, 50, 37, .3);
     border-radius: 0;
 }
 
-div.agy-tabcontent input.agy-settings-field:focus {
+div.agy-tabcontent input.agy-settings-color:focus {
+    border-color: #b73225;
+    box-shadow: 0 0 0 1px #b73225;
+    outline: 2px solid transparent;
+}
+
+div.agy-tabcontent input.agy-settings-field,
+div.agy-tabcontent textarea.agy-settings-field {
+    width: 300px;
+    border: 1px solid rgba(183, 50, 37, .3);
+    border-radius: 0;
+}
+
+div.agy-tabcontent input.agy-settings-field:focus,
+div.agy-tabcontent textarea.agy-settings-field:focus {
     border-color: #b73225;
     box-shadow: 0 0 0 1px #b73225;
     outline: 2px solid transparent;
