@@ -95,7 +95,7 @@ if (!class_exists('Agy_Dashboard')) {
 
 		    add_settings_section(
                 'agy_section_id',
-                'Agy General',
+                __('Agy General', 'agy'),
                 array($this, 'agy_settings_section_callback'),
                 'agy_settings_section_tab1'
             );
@@ -123,6 +123,19 @@ if (!class_exists('Agy_Dashboard')) {
 				'agy_settings_section_tab1',
 				'agy_section_id'
 			);
+
+			add_settings_field(
+				'agy_section_id_unregister_user',
+				__('Show for unregistered users only', 'agy'),
+				array($this, 'agy_section_id_unregister_user'),
+				'agy_settings_section_tab1',
+				'agy_section_id'
+			);
+		}
+
+		public function agy_settings_section_callback() {
+		    // CHANGE DESCRIPTION LATER
+			_e('Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy');
 		}
 
 		protected function options_check($id): string {
@@ -130,29 +143,38 @@ if (!class_exists('Agy_Dashboard')) {
 			return (!empty($options[$id]) ? $options[$id] : '');
 		}
 
+		protected function option_check_radio_btn($id): string {
+			$options = get_option( 'agy_settings_fields' );
+			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
+		}
+
 		public function agy_section_id_age() {
-			echo '
-                <input type="number" id="agy-age" 
+			echo '<input type="number" id="agy-age" 
                 class="agy-settings-field" name="agy_settings_fields[age]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('age'))).'">';
 		}
 
         public function agy_section_id_exit_url() {
-			echo '
-                <input type="url" id="agy-exit-url" 
+			echo '<input type="url" id="agy-exit-url" 
                 class="agy-settings-field" name="agy_settings_fields[exit_url]" 
-                placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($this->options_check('exit_url'))).'">';
+                placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($this->options_check('exit_url'))).'">
+                <small class="agy-field-desc">'.__('The redirect URL if the exit button was clicked', 'agy').'</small>';
 		}
 
 		public function agy_section_id_cookie_lifetime() {
-			echo '
-                <input type="number" id="agy-cookie-lifetime" 
+			echo '<input type="number" id="agy-cookie-lifetime" 
                 class="agy-settings-field" name="agy_settings_fields[cookie_lifetime]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('cookie_lifetime'))).'">';
 		}
 
-		public function agy_settings_section_callback() {
-		    return 'Settings section callback text';
+		public function agy_section_id_unregister_user() {
+
+            echo '<label class="agy-switch" for="agy-unregister-user">';
+            echo '<input type="checkbox" id="agy-unregister-user" 
+                class="agy-switch-input" name="agy_settings_fields[unregister_user]" 
+                value="1" '.$this->option_check_radio_btn('unregister_user').'>';
+			echo '<span class="agy-slider agy-round"></span>';
+			echo '</label>';
 		}
 	}
 	new Agy_Dashboard();

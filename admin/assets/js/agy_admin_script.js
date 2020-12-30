@@ -1,11 +1,6 @@
 'use script';
 
-/**
- * Handler for the Tab menu on Admin pages
- *
- * @param evt
- * @param tabName
- */
+// Handler for the Tab menu on Admin pages
 const openTab = (evt, tabName) => {
     let i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName('agy-tabcontent');
