@@ -43,7 +43,7 @@ if (!class_exists('Agy')) {
 				$this->agy_load_plugin_textdomain();
 
 			} else {
-				// include AGY_PLUGIN_PATH . '/public/Wp_Banner_Public.php';
+				include AGY_PLUGIN_PATH . '/public/Agy_Public.php';
 			}
 		}
 

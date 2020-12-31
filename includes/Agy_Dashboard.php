@@ -58,7 +58,10 @@ if (!class_exists('Agy_Dashboard')) {
                 <?php $this->agy_header_tabs(); ?>
 				<form action="options.php" method="post">
 
-					<?php settings_fields( 'agy_settings_fields' ); ?>
+                    <?php
+                    wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce'); // CHECK THIS AT THE END
+					settings_fields( 'agy_settings_fields' );
+					?>
 
                     <div id="agy-tab1" class="agy-tabcontent">
                         <?php do_settings_sections( 'agy_settings_section_tab1' ); ?>
@@ -77,6 +80,14 @@ if (!class_exists('Agy_Dashboard')) {
                     </div>
 
                     <?php
+                    if (isset($_POST['agy-save-changes-btn'])) {
+                        if(!wp_verify_nonce('agy-dashboard-save-nonce', 'agy-dashboard-save')) {
+                            wp_die(__('This is a secure WordPress plugin. Go and take a coffee.'));
+                        }
+                    }
+                    ?>
+
+                    <?php
 					submit_button(
 						__('Save Changes', 'agy'),
 						'',
@@ -84,7 +95,6 @@ if (!class_exists('Agy_Dashboard')) {
 						true,
 						array('id'=>'agy-save-changes-btn')
 					);
-//					wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce');
 					?>
 
 				</form>
@@ -367,12 +377,12 @@ if (!class_exists('Agy_Dashboard')) {
 			_e('Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy');
 		}
 
-		protected function options_check($id): string {
+		public function options_check($id): string {
 			$options = get_option('agy_settings_fields');
 			return (!empty($options[$id]) ? $options[$id] : '');
 		}
 
-		protected function option_check_radio_btn($id): string {
+		public function option_check_radio_btn($id): string {
 			$options = get_option('agy_settings_fields');
 			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
 		}

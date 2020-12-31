@@ -1,0 +1,3 @@
+- Check the nonce on Agy_Dashboard #62
+- Change the image path on Agy_Dashboard #41
+- Check settings_errors on Agy_Dashboard #23
