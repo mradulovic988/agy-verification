@@ -407,7 +407,8 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_section_id_age() {
 			echo '<input type="number" id="agy-age" 
                 class="agy-settings-field" name="agy_settings_fields[age]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('age'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('age'))).'"
+                placeholder="18">';
 		}
 
         public function agy_section_id_exit_url() {
@@ -420,7 +421,8 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_section_id_cookie_lifetime() {
 			echo '<input type="number" id="agy-cookie-lifetime" 
                 class="agy-settings-field" name="agy_settings_fields[cookie_lifetime]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('cookie_lifetime'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('cookie_lifetime'))).'"
+                placeholder="7">';
 		}
 
 		public function agy_section_id_unregister_user() {
@@ -442,40 +444,45 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_section_id_headline() {
 			echo '<input type="text" id="agy-headline" 
                 class="agy-settings-field" name="agy_settings_fields[headline]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('headline'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('headline'))).'"
+                placeholder="'.__('This is a headline', 'agy').'">';
 		}
 
 		public function agy_section_id_message() {
-			echo '<textarea class="agy-settings-field" name="agy_settings_fields[message]" 
+			echo '<textarea class="agy-settings-field" name="agy_settings_fields[message]" placeholder="'.__('This is a message', 'agy').'" 
                 id="agy-message" rows="7">'.esc_attr__(sanitize_text_field($this->options_check('message'))).'</textarea>';
 		}
 
 		public function agy_section_id_enter_btn() {
 			echo '<input type="text" id="agy-enter-btn" 
                 class="agy-settings-field" name="agy_settings_fields[enter_btn]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('enter_btn'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('enter_btn'))).'"
+                 placeholder="'.__('I am older, enter', 'agy').'">';
 		}
 
 		public function agy_section_id_exit_btn() {
 			echo '<input type="text" id="agy-exit-btn" 
                 class="agy-settings-field" name="agy_settings_fields[exit_btn]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn'))).'"
+                 placeholder="'.__('I am not older, exit', 'agy').'">';
 		}
 
 		public function agy_section_id_separator_text() {
 			echo '<input type="text" id="agy-separator-text" 
                 class="agy-settings-field" name="agy_settings_fields[separator_text]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_text'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_text'))).'"
+                 placeholder="'.__('This is a separator text', 'agy').'">';
 		}
 
 		public function agy_section_id_subtitle() {
 			echo '<input type="text" id="agy-subtitle" 
                 class="agy-settings-field" name="agy_settings_fields[subtitle]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('subtitle'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('subtitle'))).'"
+                placeholder="'.__('This is a subtitle', 'agy').'">';
 		}
 
 		public function agy_section_id_slogan() {
-			echo '<textarea class="agy-settings-field" name="agy_settings_fields[slogan]" 
+			echo '<textarea class="agy-settings-field" name="agy_settings_fields[slogan]" placeholder="'.__('This is a slogan', 'agy').'"
                 id="agy-slogan" rows="7">'.esc_attr__(sanitize_text_field($this->options_check('slogan'))).'</textarea>';
 		}
 
@@ -489,13 +496,15 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_section_id_z_index() {
 			echo '<input type="number" id="agy-z-index" 
                 class="agy-settings-field" name="agy_settings_fields[z_index]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('z_index'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('z_index'))).'"
+                placeholder="1">';
 		}
 
 		public function agy_section_id_box_width() {
 			echo '<input type="text" id="agy-box-width" 
                 class="agy-settings-field" name="agy_settings_fields[box_width]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('box_width'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('box_width'))).'"
+                placeholder="400px">';
 		}
 
 		public function agy_section_id_headline_color() {
@@ -562,13 +571,15 @@ if (!class_exists('Agy_Dashboard')) {
 		public function agy_section_id_blur_effect_container() {
 			echo '<input type="text" id="agy-blur-effect-container" 
                 class="agy-settings-field" name="agy_settings_fields[blur_effect_container]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('blur_effect_container'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('blur_effect_container'))).'"
+                placeholder="'.__('#page, .body, .header', 'agy').'">';
 		}
 
 		public function agy_section_id_blur_effect_strength() {
 			echo '<input type="number" id="agy-blur-effect-strength" 
                 class="agy-settings-field" name="agy_settings_fields[blur_effect_strength]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('blur_effect_strength'))).'">';
+                value="'.esc_attr__(sanitize_text_field($this->options_check('blur_effect_strength'))).'"
+                placeholder="3">';
 		}
 	}
 	new Agy_Dashboard();
