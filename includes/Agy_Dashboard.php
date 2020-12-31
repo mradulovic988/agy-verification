@@ -109,6 +109,7 @@ if (!class_exists('Agy_Dashboard')) {
                 'agy_sanitize_callback'
             );
 
+		    // Adding sections
 		    add_settings_section(
                 'agy_section_id',
                 __('Agy General', 'agy'),
@@ -138,6 +139,14 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 		    // General page fields
+			add_settings_field(
+				'agy_section_id_enabled_disabled',
+				__('Enable / Disable', 'agy'),
+				array($this, 'agy_section_id_enabled_disabled'),
+				'agy_settings_section_tab1',
+				'agy_section_id'
+			);
+
 		    add_settings_field(
                 'agy_section_id_age',
                 __('Minimum Age', 'agy'),
@@ -388,6 +397,13 @@ if (!class_exists('Agy_Dashboard')) {
 		}
 
 		// General page fields
+		public function agy_section_id_enabled_disabled() {
+			echo '<label class="agy-switch" for="agy-enabled-disabled"><input type="checkbox" id="agy-enabled-disabled" 
+                class="agy-switch-input" name="agy_settings_fields[enabled_disabled]" 
+                value="1" '.$this->option_check_radio_btn('enabled_disabled').'>
+                <span class="agy-slider agy-round"></span></label>';
+		}
+
 		public function agy_section_id_age() {
 			echo '<input type="number" id="agy-age" 
                 class="agy-settings-field" name="agy_settings_fields[age]" 
