@@ -457,14 +457,14 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="text" id="agy-enter-btn" 
                 class="agy-settings-field" name="agy_settings_fields[enter_btn]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('enter_btn'))).'"
-                 placeholder="'.__('I am older, enter', 'agy').'">';
+                placeholder="'.__('I am older, enter', 'agy').'">';
 		}
 
 		public function agy_section_id_exit_btn() {
 			echo '<input type="text" id="agy-exit-btn" 
                 class="agy-settings-field" name="agy_settings_fields[exit_btn]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn'))).'"
-                 placeholder="'.__('I am not older, exit', 'agy').'">';
+                placeholder="'.__('I am not older, exit', 'agy').'">';
 		}
 
 		public function agy_section_id_separator_text() {
@@ -504,7 +504,8 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="text" id="agy-box-width" 
                 class="agy-settings-field" name="agy_settings_fields[box_width]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('box_width'))).'"
-                placeholder="400px">';
+                placeholder="400px">
+                <small class="agy-field-desc">'.__('Width of the popup container', 'agy').'</small>';
 		}
 
 		public function agy_section_id_headline_color() {
@@ -572,7 +573,8 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="text" id="agy-blur-effect-container" 
                 class="agy-settings-field" name="agy_settings_fields[blur_effect_container]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('blur_effect_container'))).'"
-                placeholder="'.__('#page, .body, .header', 'agy').'">';
+                placeholder="'.__('#page, .body, .header', 'agy').'">
+                <small class="agy-field-desc">'.__('Add comma separated class or IDs of the containers', 'agy').'</small>';
 		}
 
 		public function agy_section_id_blur_effect_strength() {
