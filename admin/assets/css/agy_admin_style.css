@@ -1,6 +1,8 @@
+.agy-tab-header, .agy-tab, div#agy-tab1, div#agy-tab2, div#agy-tab3, div#agy-tab4 {background: #fff;}
+
 #agy-save-changes-btn{
     color: #b73225;
-    background: transparent;
+    background: #fff;
     border: 1px solid rgba(183, 50, 37, .3);
     border-radius: 0;
     font-size: 16px;
