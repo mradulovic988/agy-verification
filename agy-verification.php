@@ -2,7 +2,7 @@
 /**
  * Agy Verification
  *
- * @package           AgyVerification
+ * @package           Agy
  * @author            Marko Radulovic
  * @copyright         2020 M Lab Studio
  * @license           GPL-3.0-or-later

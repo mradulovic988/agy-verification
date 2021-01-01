@@ -38,8 +38,7 @@ if (!class_exists('Agy_Dashboard')) {
 		    ?>
             <div class="agy-tab-header">
                 <a href="https://mlab-studio.com" target="_blank">
-                    <!-- CHANGE THE IMAGE POSITION INSIDE THE PLUGIN!!! -->
-                    <img class="agy-logo" src="http://localhost/age-verification/wp-content/uploads/2020/12/agy-logo.png" alt="Agy Verification logo">
+                    <img class="agy-logo" src="<?php echo plugins_url( '../admin/assets/img/agy-logo.png', __FILE__ ) ?>">
                 </a>
             </div>
             <div class="agy-tab">
@@ -53,7 +52,7 @@ if (!class_exists('Agy_Dashboard')) {
 
 		public function agy_dashboard_page() {
 			?>
-			<style>div#wpwrap{background:#dce1e3!important}</style>
+			<style>div#wpwrap{background:rgba(183, 50, 37, .1)!important}</style>
 			<div id="agy-wrap" class="wrap">
                 <?php $this->agy_header_tabs(); ?>
 				<form action="options.php" method="post">
@@ -162,14 +161,6 @@ if (!class_exists('Agy_Dashboard')) {
                 'agy_settings_section_tab1',
                 'agy_section_id'
             );
-
-			add_settings_field(
-				'agy_section_id_cookie_lifetime',
-				__('Cookie Lifetime ( in days )', 'agy'),
-				array($this, 'agy_section_id_cookie_lifetime'),
-				'agy_settings_section_tab1',
-				'agy_section_id'
-			);
 
 			add_settings_field(
 				'agy_section_id_unregister_user',
@@ -416,13 +407,6 @@ if (!class_exists('Agy_Dashboard')) {
                 class="agy-settings-field" name="agy_settings_fields[exit_url]" 
                 placeholder="https://domain.com" value="'.esc_attr__(sanitize_text_field($this->options_check('exit_url'))).'">
                 <small class="agy-field-desc">'.__('The redirect URL if the exit button was clicked', 'agy').'</small>';
-		}
-
-		public function agy_section_id_cookie_lifetime() {
-			echo '<input type="number" id="agy-cookie-lifetime" 
-                class="agy-settings-field" name="agy_settings_fields[cookie_lifetime]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('cookie_lifetime'))).'"
-                placeholder="7">';
 		}
 
 		public function agy_section_id_unregister_user() {

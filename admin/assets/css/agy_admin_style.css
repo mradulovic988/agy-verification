@@ -1,5 +1,6 @@
 .agy-tab-header, .agy-tab, div#agy-tab1, div#agy-tab2, div#agy-tab3, div#agy-tab4 {background: #fff;}
-
+#agy-wrap h1, #agy-wrap h2, #agy-wrap h3, #agy-wrap h4, #agy-wrap h5, #agy-wrap h5, #agy-wrap th, #agy-wrap tr {color: #004e7c}
+#agy-wrap small {color:#591c0b; font-size: 11px;}
 #agy-save-changes-btn{
     color: #b73225;
     background: #fff;
@@ -14,7 +15,7 @@ img.agy-logo {
 }
 
 #agy-wrap {
-    max-width: 1200px;
+    max-width: 800px;
 }
 
 #agy-save-changes-btn:hover,
