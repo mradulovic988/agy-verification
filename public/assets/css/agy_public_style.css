@@ -16,11 +16,35 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%;
+    width: 50%;
     text-align: center;
+}
+
+@media (max-width: 767px) {
+    .agy-modal-content {
+        width: 90%;
+    }
 }
 
 .agy-headline {
     font-size: 26px;
     color: red;
+}
+
+.agy-enter-btn button {
+    padding: 10px 15px;
+}
+
+.agy-exit-btn button {
+    padding: 11px 15px;
+}
+
+.agy-separator-horizontal-line {
+    border: 1px solid #ddd;
+    width: 70%;
+    margin: 10px auto 20px;
+}
+
+.agy-modal-content > div {
+    margin: 10px 0;
 }

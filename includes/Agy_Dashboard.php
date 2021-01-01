@@ -45,7 +45,7 @@ if (!class_exists('Agy_Dashboard')) {
                 <button id="default-open" class="agy-tablinks" onclick="openTab(event, 'agy-tab1')"><?php _e('General', 'agy') ?></button>
                 <button class="agy-tablinks" onclick="openTab(event, 'agy-tab2')"><?php _e('Text', 'agy') ?></button>
                 <button class="agy-tablinks" onclick="openTab(event, 'agy-tab3')"><?php _e('Design', 'agy') ?></button>
-                <button class="agy-tablinks" onclick="openTab(event, 'agy-tab4')"><?php _e('Docs', 'agy') ?></button>
+                <button class="agy-tablinks agy-wc-pro" onclick="openTab(event, 'agy-tab4')"><?php _e('WooCommerce', 'agy') ?><span class="agy-pro-content">pro</span></button>
             </div>
             <?php
         }
@@ -132,7 +132,7 @@ if (!class_exists('Agy_Dashboard')) {
 
 			add_settings_section(
 				'agy_section_id',
-				__('Docs', 'agy'),
+				__('WooCommerce', 'agy'),
 				array($this, 'agy_settings_section_tab4_callback'),
 				'agy_settings_section_tab4'
 			);
@@ -293,6 +293,14 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 			add_settings_field(
+				'agy_section_id_message_color',
+				__('Message Color', 'agy'),
+				array($this, 'agy_section_id_message_color'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
 				'agy_section_id_slogan_color',
 				__('Slogan Color', 'agy'),
 				array($this, 'agy_section_id_slogan_color'),
@@ -387,16 +395,8 @@ if (!class_exists('Agy_Dashboard')) {
 			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
 		}
 
-		public function template_styling($option_font_size = '', $option_color = '', $option_background_color = '') {
-			$option_ids = array(
-                $this->options_check($option_font_size),
-                $this->options_check($option_color),
-                $this->options_check($option_background_color)
-            );
-
-			foreach ( $option_ids as $option_id ) {
-                print_r('font-size: '.$option_id[0].'; color: '.$option_id[1].'; background: '.$option_id[2].';');
-			}
+		public function template_styling($option_font_size = '', $option_color = '', $option_background_color = ''): string {
+			return 'font-size: '.$this->options_check($option_font_size).'px; color: '.$this->options_check($option_color).'; background: '.$this->options_check($option_background_color).';';
 		}
 
 		// General page fields
@@ -526,6 +526,12 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="color" id="agy-subtitle-color" 
                 class="agy-settings-color" name="agy_settings_fields[subtitle_color]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('subtitle_color'))).'">';
+		}
+
+		public function agy_section_id_message_color() {
+			echo '<input type="color" id="agy-message-color" 
+                class="agy-settings-color" name="agy_settings_fields[message_color]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('message_color'))).'">';
 		}
 
 		public function agy_section_id_slogan_color() {

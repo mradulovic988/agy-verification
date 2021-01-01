@@ -11,7 +11,7 @@
 }
 
 img.agy-logo {
-    width: 120px;
+    width: 200px;
 }
 
 #agy-wrap {
@@ -176,4 +176,14 @@ input:checked + .agy-slider:before {
 
 .agy-slider.agy-round:before {
     border-radius: 50%;
+}
+
+span.agy-pro-content {
+    position: relative;
+    bottom: 10px;
+    left: 5px;
+    background: #b73225;
+    color: #fff;
+    padding: 0px 5px 5px;
+    font-size: 16px;
 }
