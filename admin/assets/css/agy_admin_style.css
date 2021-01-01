@@ -72,7 +72,7 @@ img.agy-logo {
 }
 
 .agy-tabcontent {
-    animation: showUpEffect .7s;
+    animation: showUpEffect 1s;
 }
 
 @keyframes showUpEffect {

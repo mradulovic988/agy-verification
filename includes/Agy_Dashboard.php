@@ -188,6 +188,14 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 			add_settings_field(
+				'agy_section_id_subtitle',
+				__('Subtitle', 'agy'),
+				array($this, 'agy_section_id_subtitle'),
+				'agy_settings_section_tab2',
+				'agy_section_id'
+			);
+
+			add_settings_field(
 				'agy_section_id_message',
 				__('Message', 'agy'),
 				array($this, 'agy_section_id_message'),
@@ -215,14 +223,6 @@ if (!class_exists('Agy_Dashboard')) {
 				'agy_section_id_separator_text',
 				__('Separator Text', 'agy'),
 				array($this, 'agy_section_id_separator_text'),
-				'agy_settings_section_tab2',
-				'agy_section_id'
-			);
-
-			add_settings_field(
-				'agy_section_id_subtitle',
-				__('Subtitle', 'agy'),
-				array($this, 'agy_section_id_subtitle'),
 				'agy_settings_section_tab2',
 				'agy_section_id'
 			);
@@ -387,6 +387,18 @@ if (!class_exists('Agy_Dashboard')) {
 			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
 		}
 
+		public function template_styling($option_font_size = '', $option_color = '', $option_background_color = '') {
+			$option_ids = array(
+                $this->options_check($option_font_size),
+                $this->options_check($option_color),
+                $this->options_check($option_background_color)
+            );
+
+			foreach ( $option_ids as $option_id ) {
+                print_r('font-size: '.$option_id[0].'; color: '.$option_id[1].'; background: '.$option_id[2].';');
+			}
+		}
+
 		// General page fields
 		public function agy_section_id_enabled_disabled() {
 			echo '<label class="agy-switch" for="agy-enabled-disabled"><input type="checkbox" id="agy-enabled-disabled" 
@@ -432,6 +444,13 @@ if (!class_exists('Agy_Dashboard')) {
                 placeholder="'.__('This is a headline', 'agy').'">';
 		}
 
+		public function agy_section_id_subtitle() {
+			echo '<input type="text" id="agy-subtitle" 
+                class="agy-settings-field" name="agy_settings_fields[subtitle]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('subtitle'))).'"
+                placeholder="'.__('This is a subtitle', 'agy').'">';
+		}
+
 		public function agy_section_id_message() {
 			echo '<textarea class="agy-settings-field" name="agy_settings_fields[message]" placeholder="'.__('This is a message', 'agy').'" 
                 id="agy-message" rows="7">'.esc_attr__(sanitize_text_field($this->options_check('message'))).'</textarea>';
@@ -456,13 +475,6 @@ if (!class_exists('Agy_Dashboard')) {
                 class="agy-settings-field" name="agy_settings_fields[separator_text]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('separator_text'))).'"
                  placeholder="'.__('This is a separator text', 'agy').'">';
-		}
-
-		public function agy_section_id_subtitle() {
-			echo '<input type="text" id="agy-subtitle" 
-                class="agy-settings-field" name="agy_settings_fields[subtitle]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('subtitle'))).'"
-                placeholder="'.__('This is a subtitle', 'agy').'">';
 		}
 
 		public function agy_section_id_slogan() {

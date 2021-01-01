@@ -6,9 +6,11 @@ if(!isset($_COOKIE['agy_verification'])) { ?>
     <div id="agy-my-modal" class="agy-modal">
         <div class="agy-modal-content">
             <div class="agy-headline">
-                <p><?php echo $agy_dashboard->options_check('headline') ?></p>
+<!--                <p style="--><?php //$agy_dashboard->template_styling('', 'headline_color','') ?><!--">--><?php //echo $agy_dashboard->options_check('headline') ?><!--</p>-->
+
+                <p style=""><?php echo $agy_dashboard->options_check('headline') ?></p>
             </div>
-            <div class="agy-headline">
+            <div class="agy-subtitle">
                 <p><?php echo $agy_dashboard->options_check('subtitle') ?></p>
             </div>
             <div class="agy-description">
