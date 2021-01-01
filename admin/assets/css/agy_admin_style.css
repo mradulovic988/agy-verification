@@ -10,8 +10,35 @@
     font-weight: 500;
 }
 
+a.agy-right-header-side {
+    color: #b73225;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+a.agy-right-header-side:hover {
+    text-decoration: underline;
+}
+
+.agy-tab-header-wrapper {
+    width: 100%;
+    display: inline-flex;
+}
+
+.agy-tab-header-wrapper-left {
+    width: 70%;
+}
+
+.agy-tab-header-wrapper-right {
+    width: 30%;
+    display: grid;
+    padding: 10px 20px;
+    text-align: right;
+}
+
 img.agy-logo {
-    width: 200px;
+    width: 150px;
+    padding: 10px;
 }
 
 #agy-wrap {
