@@ -77,7 +77,7 @@ if (!class_exists('Agy_Dashboard')) {
 				array($this, 'agy_dashboard_page')
 			);
 		}
-		
+
 		protected function agy_header_tabs() {
 		    ?>
             <div class="agy-tab-header">
@@ -88,10 +88,10 @@ if (!class_exists('Agy_Dashboard')) {
                         </a>
                     </div>
                     <div class="agy-tab-header-wrapper-right">
-                        <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Upgrade to PRO', 'agy') ?></a>
-                        <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Documentation', 'agy') ?></a>
+                        <a href="https://products.mlab-studio.com/agy-verification" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Upgrade to PRO', 'agy') ?></a>
+                        <a href="https://products.mlab-studio.com/agy-verification/#docs" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Documentation', 'agy') ?></a>
                         <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Give us 5 stars', 'agy') ?></a>
-                        <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('FAQ', 'agy') ?></a>
+                        <a href="https://wordpress.org/support/plugin/agy-verification" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Support', 'agy') ?></a>
                     </div>
                 </div>
             </div>

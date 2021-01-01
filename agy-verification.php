@@ -9,7 +9,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Agy Verification
- * Plugin URI:        https://sr.wordpress.org/plugins/agy-verification
+ * Plugin URI:        https://wordpress.org/plugins/agy-verification
  * Description:       Agy is a powerful solution to add age verification on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
  * Version:           1.0.0
  * Requires at least: 5.2
