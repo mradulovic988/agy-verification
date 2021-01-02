@@ -32,7 +32,7 @@ a.agy-right-header-side:hover {
 .agy-tab-header-wrapper-right {
     width: 30%;
     display: grid;
-    padding: 10px 20px;
+    padding: 30px 20px;
     text-align: right;
 }
 
@@ -42,7 +42,7 @@ img.agy-logo {
 }
 
 #agy-wrap {
-    max-width: 800px;
+    max-width: 700px;
 }
 
 #agy-save-changes-btn:hover,
@@ -69,7 +69,7 @@ img.agy-logo {
 }
 
 .agy-tab button {
-    width: 25%;
+    width: 33.3333%;
     color: #b73225;
     background-color: inherit;
     float: left;

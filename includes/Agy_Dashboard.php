@@ -26,7 +26,7 @@ if (!class_exists('Agy_Dashboard')) {
 
         public function agy_modal_template() { ?>
             <div style="<?= $this->template_styling('', '', '', 'z_index') ?>" id="agy-my-modal" class="agy-modal">
-                <div style="<?= $this->template_styling('', '', 'background_color') ?>" class="agy-modal-content">
+                <div style="<?= $this->template_styling('', '', 'background_color', '', 'box_width') ?>" class="agy-modal-content">
                     <div class="agy-headline">
                         <p style="<?= $this->template_styling('headline_font_size', 'headline_color') ?>">
 					        <?php echo $this->options_check('headline') ?>
@@ -44,7 +44,7 @@ if (!class_exists('Agy_Dashboard')) {
                         </p>
                     </div>
                     <div class="agy-enter-btn">
-                        <button style="<?= $this->template_styling('btn_font_size', 'btn_font_color', 'btn_background_color') ?>" type="button">
+                        <button style="<?= $this->template_styling('btn_font_size', 'btn_font_color', 'btn_background_color', '', '', 'btn_border_style', 'btn_border_color') ?>" type="button">
 					        <?php echo $this->options_check('enter_btn') ?>
                         </button>
                     </div>
@@ -55,7 +55,7 @@ if (!class_exists('Agy_Dashboard')) {
                     </div>
                     <div class="agy-exit-btn">
                         <a href="<?php echo $this->options_check('exit_url') ?>">
-                            <button style="<?= $this->template_styling('exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color') ?>" type="button"><?php echo $this->options_check('exit_btn') ?></button>
+                            <button style="<?= $this->template_styling('exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color', '', '', 'exit_btn_border_style', 'exit_btn_border_color') ?>" type="button"><?php echo $this->options_check('exit_btn') ?></button>
                         </a>
                     </div>
                     <div class="agy-footer">
@@ -88,8 +88,6 @@ if (!class_exists('Agy_Dashboard')) {
                         </a>
                     </div>
                     <div class="agy-tab-header-wrapper-right">
-                        <a href="https://products.mlab-studio.com/agy-verification" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Upgrade to PRO', 'agy') ?></a>
-                        <a href="https://products.mlab-studio.com/agy-verification/#docs" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Documentation', 'agy') ?></a>
                         <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Give us 5 stars', 'agy') ?></a>
                         <a href="https://wordpress.org/support/plugin/agy-verification" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Support', 'agy') ?></a>
                     </div>
@@ -99,7 +97,6 @@ if (!class_exists('Agy_Dashboard')) {
                 <button id="default-open" class="agy-tablinks" onclick="openTab(event, 'agy-tab1')"><?php _e('General', 'agy') ?></button>
                 <button class="agy-tablinks" onclick="openTab(event, 'agy-tab2')"><?php _e('Text', 'agy') ?></button>
                 <button class="agy-tablinks" onclick="openTab(event, 'agy-tab3')"><?php _e('Design', 'agy') ?></button>
-                <button class="agy-tablinks agy-wc-pro" onclick="openTab(event, 'agy-tab4')"><?php _e('WooCommerce', 'agy') ?><span class="agy-pro-content">pro</span></button>
             </div>
             <?php
         }
@@ -112,7 +109,7 @@ if (!class_exists('Agy_Dashboard')) {
 				<form action="options.php" method="post">
 
                     <?php
-                    wp_nonce_field('agy-dashboard-save','agy-dashboard-save-nonce'); // CHECK THIS AT THE END
+                    wp_nonce_field('agy_dashboard_save'); // CHECK THIS AT THE END
 					settings_fields( 'agy_settings_fields' );
 					?>
 
@@ -128,29 +125,23 @@ if (!class_exists('Agy_Dashboard')) {
 						<?php do_settings_sections( 'agy_settings_section_tab3' ); ?>
                     </div>
 
-                    <div id="agy-tab4" class="agy-tabcontent">
-						<?php do_settings_sections( 'agy_settings_section_tab4' ); ?>
-                    </div>
-
-                    <?php
-                    if (isset($_POST['agy-save-changes-btn'])) {
-                        if(!wp_verify_nonce('agy-dashboard-save-nonce', 'agy-dashboard-save')) {
-                            wp_die(__('This is a secure WordPress plugin. Go and take a coffee.'));
-                        }
-                    }
-                    ?>
-
                     <?php
 					submit_button(
 						__('Save Changes', 'agy'),
 						'',
-						'agy-save-changes-btn',
+						'agy_save_changes_btn',
 						true,
 						array('id'=>'agy-save-changes-btn')
 					);
 					?>
 
 				</form>
+
+				<?php
+                if (isset($_POST['agy_save_changes_btn'])) {
+                    check_admin_referer( 'agy_dashboard_save' );
+                }
+				?>
 			</div>
 		    <?php
 		}
@@ -165,7 +156,7 @@ if (!class_exists('Agy_Dashboard')) {
 		    // Adding sections
 		    add_settings_section(
                 'agy_section_id',
-                __('Agy General', 'agy'),
+                __('General', 'agy'),
                 array($this, 'agy_settings_section_callback'),
                 'agy_settings_section_tab1'
             );
@@ -182,13 +173,6 @@ if (!class_exists('Agy_Dashboard')) {
 				__('Design', 'agy'),
 				array($this, 'agy_settings_section_tab3_callback'),
 				'agy_settings_section_tab3'
-			);
-
-			add_settings_section(
-				'agy_section_id',
-				__('WooCommerce', 'agy'),
-				array($this, 'agy_settings_section_tab4_callback'),
-				'agy_settings_section_tab4'
 			);
 
 		    // General page fields
@@ -323,22 +307,6 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 			add_settings_field(
-				'agy_section_id_separator_color',
-				__('Separator Color', 'agy'),
-				array($this, 'agy_section_id_separator_color'),
-				'agy_settings_section_tab3',
-				'agy_section_id'
-			);
-
-			add_settings_field(
-				'agy_section_id_separator_font_size',
-				__('Separator Font size ( in px )', 'agy'),
-				array($this, 'agy_section_id_separator_font_size'),
-				'agy_settings_section_tab3',
-				'agy_section_id'
-			);
-
-			add_settings_field(
 				'agy_section_id_subtitle_color',
 				__('Subtitle Color', 'agy'),
 				array($this, 'agy_section_id_subtitle_color'),
@@ -371,22 +339,6 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 			add_settings_field(
-				'agy_section_id_slogan_color',
-				__('Slogan Color', 'agy'),
-				array($this, 'agy_section_id_slogan_color'),
-				'agy_settings_section_tab3',
-				'agy_section_id'
-			);
-
-			add_settings_field(
-				'agy_section_id_slogan_font_size',
-				__('Slogan Font size ( in px )', 'agy'),
-				array($this, 'agy_section_id_slogan_font_size'),
-				'agy_settings_section_tab3',
-				'agy_section_id'
-			);
-
-			add_settings_field(
 				'agy_section_id_btn_background_color',
 				__('Enter Button background color', 'agy'),
 				array($this, 'agy_section_id_btn_background_color'),
@@ -398,6 +350,22 @@ if (!class_exists('Agy_Dashboard')) {
 				'agy_section_id_btn_font_color',
 				__('Enter Button font color', 'agy'),
 				array($this, 'agy_section_id_btn_font_color'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_btn_border_style',
+				__('Enter Button border style', 'agy'),
+				array($this, 'agy_section_id_btn_border_style'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_btn_border_color',
+				__('Enter Button border color', 'agy'),
+				array($this, 'agy_section_id_btn_border_color'),
 				'agy_settings_section_tab3',
 				'agy_section_id'
 			);
@@ -427,9 +395,57 @@ if (!class_exists('Agy_Dashboard')) {
 			);
 
 			add_settings_field(
+				'agy_section_id_exit_btn_border_style',
+				__('Exit Button border style', 'agy'),
+				array($this, 'agy_section_id_exit_btn_border_style'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_exit_btn_border_color',
+				__('Exit Button border color', 'agy'),
+				array($this, 'agy_section_id_exit_btn_border_color'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
 				'agy_section_id_exit_btn_font_size',
 				__('Exit Button font size ( in px )', 'agy'),
 				array($this, 'agy_section_id_exit_btn_font_size'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_separator_color',
+				__('Separator Color', 'agy'),
+				array($this, 'agy_section_id_separator_color'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_separator_font_size',
+				__('Separator Font size ( in px )', 'agy'),
+				array($this, 'agy_section_id_separator_font_size'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_slogan_color',
+				__('Slogan Color', 'agy'),
+				array($this, 'agy_section_id_slogan_color'),
+				'agy_settings_section_tab3',
+				'agy_section_id'
+			);
+
+			add_settings_field(
+				'agy_section_id_slogan_font_size',
+				__('Slogan Font size ( in px )', 'agy'),
+				array($this, 'agy_section_id_slogan_font_size'),
 				'agy_settings_section_tab3',
 				'agy_section_id'
 			);
@@ -450,11 +466,6 @@ if (!class_exists('Agy_Dashboard')) {
 			_e('Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy');
 		}
 
-		public function agy_settings_section_tab4_callback() {
-			// CHANGE DESCRIPTION LATER
-			_e('Coming soon.', 'agy');
-		}
-
 		public function options_check($id): string {
 			$options = get_option('agy_settings_fields');
 			return (!empty($options[$id]) ? $options[$id] : '');
@@ -465,8 +476,16 @@ if (!class_exists('Agy_Dashboard')) {
 			return isset($options[$id]) ? checked(1, $options[$id], false) : '';
 		}
 
-		public function template_styling($option_font_size = '', $option_color = '', $option_background_color = '', $option_z_index = ''): string {
-			return 'font-size: '.$this->options_check($option_font_size).'px; color: '.$this->options_check($option_color).'; background: '.$this->options_check($option_background_color).'; z-index: '.$this->options_check($option_z_index).';';
+		public function template_styling(
+            $option_font_size = '',
+            $option_color = '',
+            $option_background_color = '',
+            $option_z_index = '',
+            $option_width = '',
+            $option_border_style = '',
+            $option_border_color = ''
+        ): string {
+			return 'font-size: '.$this->options_check($option_font_size).'px; color: '.$this->options_check($option_color).'; background: '.$this->options_check($option_background_color).'; z-index: '.$this->options_check($option_z_index).'; width: '.$this->options_check($option_width).'%; border: '.$this->options_check($option_border_style).' '.$this->options_check($option_border_color).';';
 		}
 
 		// General page fields
@@ -560,11 +579,11 @@ if (!class_exists('Agy_Dashboard')) {
 		}
 
 		public function agy_section_id_box_width() {
-			echo '<input type="text" id="agy-box-width" 
+			echo '<input type="number" id="agy-box-width" 
                 class="agy-settings-field" name="agy_settings_fields[box_width]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('box_width'))).'"
-                placeholder="400px">
-                <small class="agy-field-desc">'.__('Width of the popup container', 'agy').'</small>';
+                placeholder="50" min="30" max="100">
+                <small class="agy-field-desc">'.__('Width ( in % ) of the popup container. From 30% to the 100%', 'agy').'</small>';
 		}
 
 		public function agy_section_id_headline_color() {
@@ -577,19 +596,6 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="number" id="agy-headline-font-size" 
                 class="agy-settings-field" name="agy_settings_fields[headline_font_size]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('headline_font_size'))).'"
-                placeholder="16">';
-		}
-
-		public function agy_section_id_separator_color() {
-			echo '<input type="color" id="agy-separator-color" 
-                class="agy-settings-color" name="agy_settings_fields[separator_color]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_color'))).'">';
-		}
-
-		public function agy_section_id_separator_font_size() {
-			echo '<input type="number" id="agy-separator-font-size" 
-                class="agy-settings-field" name="agy_settings_fields[separator_font_size]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_font_size'))).'"
                 placeholder="16">';
 		}
 
@@ -619,19 +625,6 @@ if (!class_exists('Agy_Dashboard')) {
                 placeholder="16">';
 		}
 
-		public function agy_section_id_slogan_color() {
-			echo '<input type="color" id="agy-slogan-color" 
-                class="agy-settings-color" name="agy_settings_fields[slogan_color]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('slogan_color'))).'">';
-		}
-
-		public function agy_section_id_slogan_font_size() {
-			echo '<input type="number" id="agy-slogan-font-size" 
-                class="agy-settings-field" name="agy_settings_fields[slogan_font_size]" 
-                value="'.esc_attr__(sanitize_text_field($this->options_check('slogan_font_size'))).'"
-                placeholder="16">';
-		}
-
 		public function agy_section_id_btn_background_color() {
 			echo '<input type="color" id="agy-btn-background-color" 
                 class="agy-settings-color" name="agy_settings_fields[btn_background_color]" 
@@ -642,6 +635,18 @@ if (!class_exists('Agy_Dashboard')) {
 			echo '<input type="color" id="agy-btn-font-color" 
                 class="agy-settings-color" name="agy_settings_fields[btn_font_color]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('btn_font_color'))).'">';
+		}
+
+		public function agy_section_id_btn_border_style() {
+			echo '<input type="text" id="agy-btn-border-style" placeholder="'.__('1px solid', 'agy').'"
+                class="agy-settings-color" name="agy_settings_fields[btn_border_style]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('btn_border_style'))).'">';
+		}
+
+		public function agy_section_id_btn_border_color() {
+			echo '<input type="color" id="agy-btn-border-color" 
+                class="agy-settings-color" name="agy_settings_fields[btn_border_color]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('btn_border_color'))).'">';
 		}
 
 		public function agy_section_id_btn_font_size() {
@@ -663,10 +668,48 @@ if (!class_exists('Agy_Dashboard')) {
                 value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn_font_color'))).'">';
 		}
 
+		public function agy_section_id_exit_btn_border_style() {
+			echo '<input type="text" id="agy-exit-btn-border-style" placeholder="'.__('1px solid', 'agy').'"
+                class="agy-settings-color" name="agy_settings_fields[exit_btn_border_style]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn_border_style'))).'">';
+		}
+
+		public function agy_section_id_exit_btn_border_color() {
+			echo '<input type="color" id="agy-exit-btn-border-color" 
+                class="agy-settings-color" name="agy_settings_fields[exit_btn_border_color]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn_border_color'))).'">';
+		}
+
 		public function agy_section_id_exit_btn_font_size() {
 			echo '<input type="number" id="agy-exit_btn_font_size" 
                 class="agy-settings-field" name="agy_settings_fields[exit_btn_font_size]" 
                 value="'.esc_attr__(sanitize_text_field($this->options_check('exit_btn_font_size'))).'"
+                placeholder="16">';
+		}
+
+		public function agy_section_id_separator_color() {
+			echo '<input type="color" id="agy-separator-color" 
+                class="agy-settings-color" name="agy_settings_fields[separator_color]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_color'))).'">';
+		}
+
+		public function agy_section_id_separator_font_size() {
+			echo '<input type="number" id="agy-separator-font-size" 
+                class="agy-settings-field" name="agy_settings_fields[separator_font_size]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('separator_font_size'))).'"
+                placeholder="16">';
+		}
+
+		public function agy_section_id_slogan_color() {
+			echo '<input type="color" id="agy-slogan-color" 
+                class="agy-settings-color" name="agy_settings_fields[slogan_color]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('slogan_color'))).'">';
+		}
+
+		public function agy_section_id_slogan_font_size() {
+			echo '<input type="number" id="agy-slogan-font-size" 
+                class="agy-settings-field" name="agy_settings_fields[slogan_font_size]" 
+                value="'.esc_attr__(sanitize_text_field($this->options_check('slogan_font_size'))).'"
                 placeholder="16">';
 		}
 	}

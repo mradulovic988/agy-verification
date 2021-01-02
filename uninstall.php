@@ -17,3 +17,5 @@
  *
  * @package    Agy
  */
+
+delete_option('agy_settings_fields');

@@ -32,10 +32,12 @@
 
 .agy-enter-btn button {
     padding: 10px 15px;
+    border: 1px solid #fff;
 }
 
 .agy-exit-btn button {
     padding: 11px 15px;
+    border: 1px solid #fff;
 }
 
 .agy-separator-horizontal-line {
@@ -46,4 +48,8 @@
 
 .agy-modal-content > div {
     margin: 10px 0;
+}
+
+.agy-modal-content p {
+    margin: 10px;
 }
