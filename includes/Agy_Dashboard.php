@@ -88,7 +88,7 @@ if (!class_exists('Agy_Dashboard')) {
                         </a>
                     </div>
                     <div class="agy-tab-header-wrapper-right">
-                        <a href="#" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Give us 5 stars', 'agy') ?></a>
+                        <a href="https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Give us 5 stars', 'agy') ?></a>
                         <a href="https://wordpress.org/support/plugin/agy-verification" target="_blank" class="agy-right-header-side" target="_blank"><?php _e('Support', 'agy') ?></a>
                     </div>
                 </div>
