@@ -120,7 +120,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                 <form action="options.php" method="post">
 
 					<?php
-					wp_nonce_field( 'agy_dashboard_save' ); // CHECK THIS AT THE END
+					wp_nonce_field( 'agy_dashboard_save', 'agy_form_save_name' ); // CHECK THIS AT THE END
 					settings_fields( 'agy_settings_fields' );
 					?>
 
@@ -149,8 +149,9 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                 </form>
 
 				<?php
-				if ( isset( $_POST['agy_save_changes_btn'] ) ) {
-					check_admin_referer( 'agy_dashboard_save' );
+				if ( ! isset( $_POST['agy_form_save_name'] ) ||
+                     ! wp_verify_nonce( $_POST['agy_form_save_name'], 'agy_dashboard_save' ) ) {
+					return;
 				}
 				?>
             </div>

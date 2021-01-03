@@ -43,6 +43,8 @@ if ( ! class_exists( 'Agy' ) ) {
 				include AGY_PLUGIN_PATH . '/admin/Agy_Admin.php';
 
 				$this->agy_load_plugin_textdomain();
+				add_filter( 'plugin_action_links', array( $this, 'agy_settings_link' ), 10, 2 );
+				add_filter( 'plugin_row_meta', array( $this, 'agy_set_plugin_meta' ), 10, 2 );
 
 			} else {
 				include AGY_PLUGIN_PATH . '/public/Agy_Public.php';
@@ -55,6 +57,41 @@ if ( ! class_exists( 'Agy' ) ) {
 				false,
 				AGY_PLUGIN_BASENAME . dirname( __FILE__ ) . '/languages'
 			);
+		}
+
+		public function agy_settings_link( $links, $file ): array {
+			static $plugin;
+			$plugin = plugin_basename( __FILE__ );
+
+			if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
+				array_unshift(
+					$links,
+					sprintf( '<a href="%s">' . __( 'Settings', 'agy' ), 'tools.php?page=agy-dashboard' ) . '</a>'
+				);
+			}
+
+			return $links;
+		}
+
+		public function agy_set_plugin_meta( $links, $file ): array {
+			static $plugin;
+			$plugin = plugin_basename( __FILE__ );
+
+			if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
+				array_push(
+					$links,
+					sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'agy' ) . '</a>', 'https://wordpress.org/support/plugin/agy-verification'
+					)
+				);
+
+				array_push(
+					$links,
+					sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'agy' ) . '</a>', 'https://github.com/mradulovic988/agy-verification'
+					)
+				);
+			}
+
+			return $links;
 		}
 	}
 
