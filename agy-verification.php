@@ -22,23 +22,25 @@
  * License URI:       http://www.gnu.org/licenses/gpl-3.0.txt
  */
 
-if (!defined('ABSPATH')) exit;
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
-if (!class_exists('Agy')) {
+if ( ! class_exists( 'Agy' ) ) {
 
 	class Agy {
 		public function __construct() {
-			if (!defined('AGY_PLUGIN_PATH')) {
-				define('AGY_PLUGIN_PATH', plugin_dir_path(__FILE__));
+			if ( ! defined( 'AGY_PLUGIN_PATH' ) ) {
+				define( 'AGY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 			}
 
-			if (!defined('AGY_PLUGIN_BASENAME')) {
-				define('AGY_PLUGIN_BASENAME', plugin_basename(__FILE__));
+			if ( ! defined( 'AGY_PLUGIN_BASENAME' ) ) {
+				define( 'AGY_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 			}
 
-			if (is_admin()) {
-				 include AGY_PLUGIN_PATH . '/includes/Agy_Dashboard.php';
-				 include AGY_PLUGIN_PATH . '/admin/Agy_Admin.php';
+			if ( is_admin() ) {
+				include AGY_PLUGIN_PATH . '/includes/Agy_Dashboard.php';
+				include AGY_PLUGIN_PATH . '/admin/Agy_Admin.php';
 
 				$this->agy_load_plugin_textdomain();
 
@@ -51,7 +53,7 @@ if (!class_exists('Agy')) {
 			load_plugin_textdomain(
 				'agy',
 				false,
-				AGY_PLUGIN_BASENAME . dirname(__FILE__) . '/languages'
+				AGY_PLUGIN_BASENAME . dirname( __FILE__ ) . '/languages'
 			);
 		}
 	}
