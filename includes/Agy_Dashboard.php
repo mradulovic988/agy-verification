@@ -81,22 +81,71 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			);
 		}
 
+		protected function agy_header_links( $header_text, $header_url, $header_target = '', $header_class = '' ): string {
+			return sprintf(
+				wp_kses(
+					__( '<a href="%s" target="%s" class="%s">' . $header_text . '</a>', 'agy' ),
+					array(
+						'a' => array(
+							'href'   => array(),
+							'target' => array(),
+							'class'  => array()
+						),
+					)
+				),
+
+				esc_url( $header_url ),
+				__( $header_target, 'agy' ),
+				__( $header_class, 'agy' )
+			);
+		}
+
 		protected function agy_header_tabs() {
 			?>
             <div class="agy-tab-header">
                 <div class="agy-tab-header-wrapper">
                     <div class="agy-tab-header-wrapper-left">
-                        <a href="https://mlab-studio.com" target="_blank">
-                            <img class="agy-logo"
-                                 src="<?php echo plugins_url( '../admin/assets/img/agy-logo.png', __FILE__ ) ?>">
-                        </a>
+
+						<?php
+						// Logo
+						echo sprintf(
+							wp_kses(
+								__( '<a href="%s" target="%s"><img src="%s" class="%s"></a>', 'agy' ),
+								array(
+									'a'   => array(
+										'href'   => array(),
+										'target' => array()
+									),
+									'img' => array(
+										'src'   => array(),
+										'class' => array()
+									)
+								)
+							),
+
+							esc_url( 'https://mlab-studio.com' ),
+							__( '_blank', 'agy' ),
+							plugins_url( '../admin/assets/img/agy-logo.png', __FILE__ ),
+							__( 'agy-logo', 'agy' )
+						);
+						?>
                     </div>
                     <div class="agy-tab-header-wrapper-right">
-                        <a href="https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post"
-                           target="_blank" class="agy-right-header-side"
-                           target="_blank"><?php _e( 'Give us 5 stars', 'agy' ) ?></a>
-                        <a href="https://wordpress.org/support/plugin/agy-verification" target="_blank"
-                           class="agy-right-header-side" target="_blank"><?php _e( 'Support', 'agy' ) ?></a>
+						<?php
+						echo $this->agy_header_links(
+							'Give us 5 stars',
+							'https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post',
+							'_blank',
+							'agy-right-header-side'
+						);
+
+						echo $this->agy_header_links(
+							'Support',
+							'https://wordpress.org/support/plugin/agy-verification',
+							'_blank',
+							'agy-right-header-side'
+						);
+						?>
                     </div>
                 </div>
             </div>
@@ -150,7 +199,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 				<?php
 				if ( ! isset( $_POST['agy_form_save_name'] ) ||
-                     ! wp_verify_nonce( $_POST['agy_form_save_name'], 'agy_dashboard_save' ) ) {
+				     ! wp_verify_nonce( $_POST['agy_form_save_name'], 'agy_dashboard_save' ) ) {
 					return;
 				}
 				?>
@@ -652,9 +701,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		}
 
 		public function agy_section_id_btn_border_style() {
-			echo '<input type="text" id="agy-btn-border-style" placeholder="' . __( '1px solid', 'agy' ) . '"
+			echo '<input type="text" id="agy-btn-border-style" placeholder="' . __( '2px outset', 'agy' ) . '"
                 class="agy-settings-color" name="agy_settings_fields[btn_border_style]" 
-                value="' . esc_attr__( sanitize_text_field( $this->options_check( 'btn_border_style' ) ) ) . '">';
+                value="' . esc_attr__( sanitize_text_field( $this->options_check( 'btn_border_style' ) ) ) . '">
+                <small class="agy-field-desc">' . __( 'CSS property', 'agy' ) . '</small>';
 		}
 
 		public function agy_section_id_btn_border_color() {
@@ -685,7 +735,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		public function agy_section_id_exit_btn_border_style() {
 			echo '<input type="text" id="agy-exit-btn-border-style" placeholder="' . __( '1px solid', 'agy' ) . '"
                 class="agy-settings-color" name="agy_settings_fields[exit_btn_border_style]" 
-                value="' . esc_attr__( sanitize_text_field( $this->options_check( 'exit_btn_border_style' ) ) ) . '">';
+                value="' . esc_attr__( sanitize_text_field( $this->options_check( 'exit_btn_border_style' ) ) ) . '">
+                <small class="agy-field-desc">' . __( 'CSS property', 'agy' ) . '</small>';
 		}
 
 		public function agy_section_id_exit_btn_border_color() {
