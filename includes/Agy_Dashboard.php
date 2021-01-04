@@ -1,7 +1,6 @@
 <?php
 /**
- * Class Agy_Dashboard
- * All major methods for plugin
+ * Main class for all communication between front-end and as well with the back-end
  *
  * @class Agy_Dashboard
  * @package Agy_Dashboard
@@ -24,6 +23,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			settings_errors(); // CHECK THIS
 		}
 
+		// Front-end modal template
 		public function agy_modal_template() { ?>
             <div style="<?= $this->template_styling( '', '', '', 'z_index' ) ?>" id="agy-my-modal" class="agy-modal">
                 <div style="<?= $this->template_styling( '', '', 'background_color', '', 'box_width' ) ?>"
@@ -70,16 +70,20 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                     </div>
                 </div>
             </div>
-		<?php }
-
-		public function agy_dashboard() {
-			add_submenu_page( 'tools.php', __( 'Agy Verification', 'agy' ), __( 'Agy Verification', 'agy' ), 'manage_options', 'agy-dashboard', array(
-				$this,
-				'agy_dashboard_page'
-			) );
+			<?php
 		}
 
-		protected function agy_header_links( $header_text, $header_url, $header_target = '', $header_class = '' ): string {
+		/**
+		 * Validate and sanitize links
+		 *
+		 * @param string $header_text Text between the a href
+		 * @param string $header_url URL for a href
+		 * @param string $header_target Param for target in a href
+		 * @param string $header_class Class for a href
+		 *
+		 * @return string
+		 */
+		protected function agy_header_links( string $header_text, string $header_url, $header_target = '', $header_class = '' ): string {
 			return sprintf(
 				wp_kses(
 					__( '<a href="%s" target="%s" class="%s">' . $header_text . '</a>', 'agy' ),
@@ -98,6 +102,32 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			);
 		}
 
+		/**
+		 * Front-end modal template conditional styling
+		 *
+		 * @param string $option_font_size Font size declaration
+		 * @param string $option_color Color declaration
+		 * @param string $option_background_color Background color declaration
+		 * @param string $option_z_index Z Index declaration
+		 * @param string $option_width Width declaration
+		 * @param string $option_border_style Border declaration
+		 * @param string $option_border_color Border color declaration
+		 *
+		 * @return string
+		 */
+		public function template_styling(
+			$option_font_size = '',
+			$option_color = '',
+			$option_background_color = '',
+			$option_z_index = '',
+			$option_width = '',
+			$option_border_style = '',
+			$option_border_color = ''
+		): string {
+			return 'font-size: ' . $this->options_check( $option_font_size ) . 'px; color: ' . $this->options_check( $option_color ) . '; background: ' . $this->options_check( $option_background_color ) . '; z-index: ' . $this->options_check( $option_z_index ) . '; width: ' . $this->options_check( $option_width ) . '%; border: ' . $this->options_check( $option_border_style ) . ' ' . $this->options_check( $option_border_color ) . ';';
+		}
+
+		// Header menu for admin template
 		protected function agy_header_tabs() {
 			?>
             <div class="agy-tab-header">
@@ -147,6 +177,15 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			<?php
 		}
 
+		// Adding submenu page
+		public function agy_dashboard() {
+			add_submenu_page( 'tools.php', __( 'Agy Verification', 'agy' ), __( 'Agy Verification', 'agy' ), 'manage_options', 'agy-dashboard', array(
+				$this,
+				'agy_dashboard_page'
+			) );
+		}
+
+		// Main form on admin part
 		public function agy_dashboard_page() {
 			?>
             <style>div#wpwrap {
@@ -195,6 +234,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			<?php
 		}
 
+		// Settings API
 		public function agy_register_settings() {
 			register_setting( 'agy_settings_fields', 'agy_settings_fields', 'agy_sanitize_callback' );
 
@@ -403,31 +443,46 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			_e( 'Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy' );
 		}
 
-		public function options_check( $id ): string {
+		/**
+		 * Getting option
+		 *
+		 * @param string $id Checking option value
+		 *
+		 * @return string
+		 */
+		public function options_check( string $id ): string {
 			$options = get_option( 'agy_settings_fields' );
 
 			return ( ! empty( $options[ $id ] ) ? $options[ $id ] : '' );
 		}
 
-		public function option_check_radio_btn( $id ): string {
+		/**
+		 * Getting option for radio buttons only
+		 *
+		 * @param string $id Checking option value for radio button only
+		 *
+		 * @return string
+		 */
+		public function option_check_radio_btn( string $id ): string {
 			$options = get_option( 'agy_settings_fields' );
 
 			return isset( $options[ $id ] ) ? checked( 1, $options[ $id ], false ) : '';
 		}
 
-		public function template_styling(
-			$option_font_size = '',
-			$option_color = '',
-			$option_background_color = '',
-			$option_z_index = '',
-			$option_width = '',
-			$option_border_style = '',
-			$option_border_color = ''
-		): string {
-			return 'font-size: ' . $this->options_check( $option_font_size ) . 'px; color: ' . $this->options_check( $option_color ) . '; background: ' . $this->options_check( $option_background_color ) . '; z-index: ' . $this->options_check( $option_z_index ) . '; width: ' . $this->options_check( $option_width ) . '%; border: ' . $this->options_check( $option_border_style ) . ' ' . $this->options_check( $option_border_color ) . ';';
-		}
-
-		protected function agy_settings_fields( $type, $id, $class, $name, $value, $placeholder = '', $description = '', $min = '', $max = '' ) {
+		/**
+		 * Conditional check for input field in Settings API
+		 *
+		 * @param string $type Input field type attribute
+		 * @param string $id Input field ID attribute
+		 * @param string $class Input field class attribute
+		 * @param string $name Input field name attribute
+		 * @param string $value Input field value attribute
+		 * @param string $placeholder Input field placeholder attribute
+		 * @param string $description Input field description
+		 * @param string $min Input field min attribute
+		 * @param string $max Input field max attribute
+		 */
+		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '' ) {
 			switch ( $type ) {
 				case 'text':
 					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'agy' ) . '"><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
@@ -450,7 +505,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			}
 		}
 
-		// General page fields
+		// General page Settings API fields
 		public function agy_section_id_enabled_disabled() {
 			$this->agy_settings_fields( 'checkbox', 'agy-enabled-disabled', 'agy-switch-input', 'enabled_disabled', $this->option_check_radio_btn( 'enabled_disabled' ) );
 		}
@@ -467,7 +522,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			$this->agy_settings_fields( 'url', 'agy-exit-url', 'agy-settings-field', 'exit_url', esc_attr__( sanitize_text_field( $this->options_check( 'exit_url' ) ) ), 'https://domain.com', 'The redirect URL if the exit button was clicked' );
 		}
 
-		// Text page fields
+		// Text page Settings API fields
 		public function agy_section_id_headline() {
 			$this->agy_settings_fields( 'text', 'agy-headline', 'agy-settings-field', 'headline', esc_attr__( sanitize_text_field( $this->options_check( 'headline' ) ) ), 'This is a headline' );
 		}
@@ -496,7 +551,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			$this->agy_settings_fields( 'textarea', 'agy-slogan', 'agy-settings-field', 'slogan', esc_attr__( sanitize_text_field( $this->options_check( 'slogan' ) ) ), 'This is a slogan' );
 		}
 
-		// Design page fields
+		// Design page Settings API fields
 		public function agy_section_id_background_color() {
 			$this->agy_settings_fields( 'color', 'agy-background-color', 'agy-settings-color', 'background_color', esc_attr__( sanitize_text_field( $this->options_check( 'background_color' ) ) ) );
 		}
