@@ -7,7 +7,7 @@ Stable tag: 1.0.0
 
 == Description ==
 
-Agy is a modern and responsive solution for any kind of verification.
+Agy Verification is a modern and responsive solution for any kind of verification.
 Simply setup the texts, modify the design and your ready.
 
 This comes specially handy if your content or products are about alcohol, gambling, CBD or other adult content.

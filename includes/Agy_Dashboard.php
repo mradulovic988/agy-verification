@@ -20,12 +20,16 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		}
 
 		public function agy_show_error_notice() {
-			settings_errors(); // CHECK THIS
+			if ( isset( $_GET['settings-updated'] ) ) {
+				$message = __( 'You have successfully saved your settings.', 'agy' );
+				add_settings_error( 'agy_settings_fields', 'sucess', $message, 'success' );
+			}
 		}
 
 		// Front-end modal template
 		public function agy_modal_template() { ?>
-            <div style="<?= $this->agy_template_styling( '', '', '', 'z_index' ) ?>" id="agy-my-modal" class="agy-modal">
+            <div style="<?= $this->agy_template_styling( '', '', '', 'z_index' ) ?>" id="agy-my-modal"
+                 class="agy-modal">
                 <div style="<?= $this->agy_template_styling( '', '', 'background_color', '', 'box_width' ) ?>"
                      class="agy-modal-content">
                     <div class="agy-headline">
@@ -188,12 +192,15 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		// Main form on admin part
 		public function agy_dashboard_page() {
 			?>
-            <style>div#wpwrap {background: rgba(183, 50, 37, .1) !important;}</style>
+            <style>div#wpwrap {
+                    background: rgba(183, 50, 37, .1) !important;
+                }</style>
             <div id="agy-wrap" class="wrap">
 				<?php $this->agy_header_tabs(); ?>
                 <form action="options.php" method="post">
 
 					<?php
+					settings_errors( 'agy_settings_fields' );
 					wp_nonce_field( 'agy_dashboard_save', 'agy_form_save_name' ); // CHECK THIS AT THE END
 					settings_fields( 'agy_settings_fields' );
 					?>
