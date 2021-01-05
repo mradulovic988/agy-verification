@@ -1,115 +1,78 @@
-=== Agy Verification ===
+=== Agy verification ===
 Contributors: upss1988
-Donate link: https://mlab-studio.com/
 Tags: age verification, age gate, age restriction, age popup, page gate, content warning
-Requires at least: 5.2
+Requires at least: 4.6
 Tested up to: 5.6
-Requires PHP: 7.2
-Stable tag: 4.3
-License: GPLv3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Stable tag: 1.0.0
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Agy is a modern and responsive solution for any kind of verification.
+Simply setup the texts, modify the design and your ready.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+This comes specially handy if your content or products are about alcohol, gambling, CBD or other adult content.
 
-A few notes about the sections above:
+== How to use ==
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+After activation move to Tools->Agy Verification and begin to configure your verification settings.
 
-Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+Start with your general settings: turn on / off, set your exit URL and decide if it should apply to registered users or not.
 
-If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+Move to the text settings and customise all your texts.
+
+== Features ==
+
+* Let users to verify anything on page visit
+* Show the verification only for non-registered users
+* Modify every text, color, background and more
+* Redirect failed attempt to a specified page
+* Mobil-friendly design
+
+== Support ==
+
+The free support is exclusively limited to the wordpress.org support forum.
+
+=== CODING STANDARDS MADE IN SERBIA ===
+
+Agy is coded with modern PHP and WordPress standards in mind. It’s fully OOP coded.
+Agy has your website performance in mind -  every script and style is minified and loaded conditionally.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+= Default Method =
+1. Go to Settings > Plugins in your administrator panel.
+1. Click `Add New`
+1. Search for Agy Verification
+1. Click install.
 
-e.g.
+= Easy Method =
+1. Download the zip file.
+1. Login to your `Dashboard`
+1. Open your plugins bar and click `Add New`
+1. Click the `upload tab`
+1. Choose `agy-verification` from your downloads folder
+1. Click `Install Now`
+1. All done, now just activate the plugin
+1. Go to Tools -> Agy Verification and configure it ( or simple click on Settings )
+1. Save, and you're all good.
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+= Old Method =
+1. Upload `gy-verification` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
 
-== Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Two-Column mode
+2. One-Column mode
+3. Customizer Settings
+3. Admin settings
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 1.0.0 =
+* Plugin created an published
 
 == Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-"Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 1.0.0 =
+* Plugin created an published

@@ -10,9 +10,9 @@
  * @wordpress-plugin
  * Plugin Name:       Agy Verification
  * Plugin URI:        https://wordpress.org/plugins/agy-verification
- * Description:       Agy is a powerful solution to add age verification on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
+ * Description:       Agy is a powerful solution to add any kind of verification restriction on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
  * Version:           1.0.0
- * Requires at least: 5.2
+ * Requires at least: 4.6
  * Requires PHP:      7.2
  * Author:            Marko Radulovic
  * Author URI:        https://mlab-studio.com/
@@ -80,14 +80,12 @@ if ( ! class_exists( 'Agy' ) ) {
 			if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
 				array_push(
 					$links,
-					sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'agy' ) . '</a>', 'https://wordpress.org/support/plugin/agy-verification'
-					)
+					sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'agy' ) . '</a>', 'https://wordpress.org/support/plugin/agy-verification' )
 				);
 
 				array_push(
 					$links,
-					sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'agy' ) . '</a>', 'https://github.com/mradulovic988/agy-verification'
-					)
+					sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'agy' ) . '</a>', 'https://github.com/mradulovic988/agy-verification' )
 				);
 			}
 
