@@ -1,4 +1,4 @@
-'use script';
+'use strict';
 
 // Handler for the Tab menu on Admin pages
 const openTab = (evt, tabName) => {

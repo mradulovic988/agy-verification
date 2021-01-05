@@ -241,17 +241,17 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_settings_section_callback() {
 			// CHANGE DESCRIPTION LATER
-			_e( 'Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy' );
+			_e( 'Set your General settings.', 'agy' );
 		}
 
 		public function agy_settings_section_tab2_callback() {
 			// CHANGE DESCRIPTION LATER
-			_e( 'Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy' );
+			_e( 'Set all of the text for your modal verification.', 'agy' );
 		}
 
 		public function agy_settings_section_tab3_callback() {
 			// CHANGE DESCRIPTION LATER
-			_e( 'Donec sollicitudin molestie malesuada. Quisque velit nisi, pretium ut lacinia in, elementum id enim.', 'agy' );
+			_e( 'Set the desirable design for the modal verification.', 'agy' );
 		}
 
 		// Settings API

@@ -20,13 +20,15 @@ Start with your general settings: turn on / off, set your exit URL and decide if
 
 Move to the text settings and customise all your texts.
 
+Move to the Design section to design your modal popup.
+
 == Features ==
 
 * Let users to verify anything on page visit
 * Show the verification only for non-registered users
 * Modify every text, color, background and more
 * Redirect failed attempt to a specified page
-* Mobil-friendly design
+* Mobile-friendly design
 
 == Support ==
 
@@ -57,21 +59,21 @@ Agy has your website performance in mind -  every script and style is minified a
 1. Save, and you're all good.
 
 = Old Method =
-1. Upload `gy-verification` to the `/wp-content/plugins/` directory
+1. Upload `agy-verification` to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
 
 
 == Screenshots ==
 
-1. Two-Column mode
-2. One-Column mode
-3. Customizer Settings
-3. Admin settings
+1. General settings
+2. Text settings
+3. Design Settings
+3. Front-end view
 
 == Changelog ==
 
 = 1.0.0 =
-* Plugin created an published
+* Plugin created and published
 
 == Upgrade Notice ==
 = 1.0.0 =

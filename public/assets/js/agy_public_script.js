@@ -1,4 +1,5 @@
 'use strict';
+
 // Show modal popup
 if(document.querySelector('#agy-my-modal')) document.querySelector('#agy-my-modal').style.display = 'block';
 
