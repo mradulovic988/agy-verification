@@ -4,7 +4,7 @@
  *
  * @package           Agy
  * @author            Marko Radulovic
- * @copyright         2020 M Lab Studio
+ * @copyright         2021 Marko Radulovic
  * @license           GPL-3.0-or-later
  *
  * @wordpress-plugin
