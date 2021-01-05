@@ -1,2 +1,0 @@
-- Check the nonce on Agy_Dashboard #62
-- Add condition that hide popup if all fields are empty
