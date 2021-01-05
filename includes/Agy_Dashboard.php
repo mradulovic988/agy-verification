@@ -290,33 +290,33 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL *', 'agy' ), array(
 				$this,
 				'agy_section_id_exit_url'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
 			// Texts page fields
-			add_settings_field( 'agy_section_id_headline', __( 'Headline', 'agy' ), array(
+			add_settings_field( 'agy_section_id_headline', __( 'Headline *', 'agy' ), array(
 				$this,
 				'agy_section_id_headline'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_subtitle', __( 'Subtitle', 'agy' ), array(
+			add_settings_field( 'agy_section_id_subtitle', __( 'Subtitle *', 'agy' ), array(
 				$this,
 				'agy_section_id_subtitle'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_message', __( 'Message', 'agy' ), array(
+			add_settings_field( 'agy_section_id_message', __( 'Message *', 'agy' ), array(
 				$this,
 				'agy_section_id_message'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_enter_btn', __( 'Enter Button Label', 'agy' ), array(
+			add_settings_field( 'agy_section_id_enter_btn', __( 'Enter Button Label *', 'agy' ), array(
 				$this,
 				'agy_section_id_enter_btn'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn', __( 'Exit Button Label', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn', __( 'Exit Button Label *', 'agy' ), array(
 				$this,
 				'agy_section_id_exit_btn'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
@@ -487,10 +487,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		 * @param string $min Input field min attribute
 		 * @param string $max Input field max attribute
 		 */
-		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '' ) {
+		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '' ) {
 			switch ( $type ) {
 				case 'text':
-					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'agy' ) . '"><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
+					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'agy' ) . '" ' . $required . '><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
 					break;
 				case 'number':
 					echo '<input type="number" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'agy' ) . '" min="' . $min . '" max="' . $max . '"><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
@@ -499,13 +499,13 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					echo '<label class="agy-switch" for="' . $id . '"><input type="checkbox" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="1" ' . $value . '><span class="agy-slider agy-round"></span></label><small class="agy-field-desc">' . $description . '</small>';
 					break;
 				case 'url':
-					echo '<input type="url" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '"placeholder="' . __( $placeholder, 'agy' ) . '"><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
+					echo '<input type="url" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '"placeholder="' . __( $placeholder, 'agy' ) . '" ' . $required . '><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
 					break;
 				case 'color':
 					echo '<input type="color" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '">';
 					break;
 				case 'textarea':
-					echo '<textarea class="' . $class . '" name="agy_settings_fields[' . $name . ']" placeholder="' . __( $placeholder, 'agy' ) . '" id="' . $id . '" rows="7">' . $value . '</textarea>';
+					echo '<textarea class="' . $class . '" name="agy_settings_fields[' . $name . ']" placeholder="' . __( $placeholder, 'agy' ) . '" id="' . $id . '" rows="7" ' . $required . '>' . $value . '</textarea>';
 					break;
 			}
 		}
@@ -524,28 +524,28 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		}
 
 		public function agy_section_id_exit_url() {
-			$this->agy_settings_fields( 'url', 'agy-exit-url', 'agy-settings-field', 'exit_url', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_url' ) ) ), 'https://domain.com', 'The redirect URL if the exit button was clicked' );
+			$this->agy_settings_fields( 'url', 'agy-exit-url', 'agy-settings-field', 'exit_url', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_url' ) ) ), 'https://domain.com', 'The redirect URL if the exit button was clicked', '', '', 'required' );
 		}
 
 		// Text page Settings API fields
 		public function agy_section_id_headline() {
-			$this->agy_settings_fields( 'text', 'agy-headline', 'agy-settings-field', 'headline', esc_attr__( sanitize_text_field( $this->agy_options_check( 'headline' ) ) ), 'This is a headline' );
+			$this->agy_settings_fields( 'text', 'agy-headline', 'agy-settings-field', 'headline', esc_attr__( sanitize_text_field( $this->agy_options_check( 'headline' ) ) ), 'This is a headline', '', '', '', 'required' );
 		}
 
 		public function agy_section_id_subtitle() {
-			$this->agy_settings_fields( 'text', 'agy-subtitle', 'agy-settings-field', 'subtitle', esc_attr__( sanitize_text_field( $this->agy_options_check( 'subtitle' ) ) ), 'This is a subtitle' );
+			$this->agy_settings_fields( 'text', 'agy-subtitle', 'agy-settings-field', 'subtitle', esc_attr__( sanitize_text_field( $this->agy_options_check( 'subtitle' ) ) ), 'This is a subtitle', '', '', '', 'required' );
 		}
 
 		public function agy_section_id_message() {
-			$this->agy_settings_fields( 'textarea', 'agy-message', 'agy-settings-field', 'message', esc_attr__( sanitize_text_field( $this->agy_options_check( 'message' ) ) ) );
+			$this->agy_settings_fields( 'textarea', 'agy-message', 'agy-settings-field', 'message', esc_attr__( sanitize_text_field( $this->agy_options_check( 'message' ) ) ), '', '', '', '', 'required' );
 		}
 
 		public function agy_section_id_enter_btn() {
-			$this->agy_settings_fields( 'text', 'agy-enter-btn', 'agy-settings-field', 'enter_btn', esc_attr__( sanitize_text_field( $this->agy_options_check( 'enter_btn' ) ) ), 'I am older, enter' );
+			$this->agy_settings_fields( 'text', 'agy-enter-btn', 'agy-settings-field', 'enter_btn', esc_attr__( sanitize_text_field( $this->agy_options_check( 'enter_btn' ) ) ), 'I am older, enter', '', '', '', 'required' );
 		}
 
 		public function agy_section_id_exit_btn() {
-			$this->agy_settings_fields( 'text', 'agy-exit-btn', 'agy-settings-field', 'exit_btn', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_btn' ) ) ), 'I am not older, exit' );
+			$this->agy_settings_fields( 'text', 'agy-exit-btn', 'agy-settings-field', 'exit_btn', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_btn' ) ) ), 'I am not older, exit', '', '', '', 'required' );
 		}
 
 		public function agy_section_id_separator_text() {
