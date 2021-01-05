@@ -84,9 +84,9 @@ Your theme is overwrite the styling of the popup. Please go to the Design page a
 
 == Screenshots ==
 
-1. General settings
-2. Text settings
-3. Design Settings
+1. General page settings
+2. Text page settings
+3. Design page settings
 4. Front-end view
 
 == Changelog ==
