@@ -86,6 +86,10 @@ Yes. The plugin is fully compatible with every WordPress theme.
 
 Your theme is overwriting the styling of the popup. Please go to the Design page and increase the Z-index values to 9999
 
+= Can I use the plugin for other restrictions on my website? =
+
+Yes! You can use Agy Verification for any restriction that you need.
+
 == Screenshots ==
 
 1. General page settings
