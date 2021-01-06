@@ -34,6 +34,8 @@ Move to the Design section to design your modal popup.
 * Redirect failed attempt to a specified page
 * Mobile-friendly design
 
+[vimeo https://vimeo.com/497790709]
+
 == Support ==
 
 The support is exclusively limited to the wordpress.org support forum.
