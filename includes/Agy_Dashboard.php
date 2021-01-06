@@ -566,7 +566,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		}
 
 		public function agy_section_id_box_width() {
-			$this->agy_settings_fields( 'number', 'agy-box-width', 'agy-settings-field', 'box_width', esc_attr__( sanitize_text_field( $this->agy_options_check( 'box_width' ) ) ), '50', 'Width ( in % ) of the popup container. From 30% to the 100%', '30', '50' );
+			$this->agy_settings_fields( 'number', 'agy-box-width', 'agy-settings-field', 'box_width', esc_attr__( sanitize_text_field( $this->agy_options_check( 'box_width' ) ) ), '50', 'Width ( in % ) of the popup container. From 30% to the 90%', '30', '90' );
 		}
 
 		public function agy_section_id_headline_color() {
