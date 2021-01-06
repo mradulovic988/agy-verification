@@ -290,11 +290,6 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL *', 'agy' ), array(
-				$this,
-				'agy_section_id_exit_url'
-			), 'agy_settings_section_tab1', 'agy_section_id' );
-
 			// Texts page fields
 			add_settings_field( 'agy_section_id_headline', __( 'Headline *', 'agy' ), array(
 				$this,
@@ -319,6 +314,11 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			add_settings_field( 'agy_section_id_exit_btn', __( 'Exit Button Label *', 'agy' ), array(
 				$this,
 				'agy_section_id_exit_btn'
+			), 'agy_settings_section_tab2', 'agy_section_id' );
+
+			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL *', 'agy' ), array(
+				$this,
+				'agy_section_id_exit_url'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
 			add_settings_field( 'agy_section_id_separator_text', __( 'Separator Text', 'agy' ), array(
@@ -523,10 +523,6 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			$this->agy_settings_fields( 'checkbox', 'agy-debug-mode', 'agy-switch-input', 'debug_mode', $this->agy_option_check_radio_btn( 'debug_mode' ), '', 'Turn off the cookie for testing purpose. While the Debug mode is on, "Show for unregistered users only" field will not be usable. Don\'t forget to turn it off when you finish.' );
 		}
 
-		public function agy_section_id_exit_url() {
-			$this->agy_settings_fields( 'url', 'agy-exit-url', 'agy-settings-field', 'exit_url', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_url' ) ) ), 'https://domain.com', 'The redirect URL if the exit button was clicked', '', '', 'required' );
-		}
-
 		// Text page Settings API fields
 		public function agy_section_id_headline() {
 			$this->agy_settings_fields( 'text', 'agy-headline', 'agy-settings-field', 'headline', esc_attr__( sanitize_text_field( $this->agy_options_check( 'headline' ) ) ), 'This is a headline', '', '', '', 'required' );
@@ -546,6 +542,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_section_id_exit_btn() {
 			$this->agy_settings_fields( 'text', 'agy-exit-btn', 'agy-settings-field', 'exit_btn', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_btn' ) ) ), 'I am not older, exit', '', '', '', 'required' );
+		}
+
+		public function agy_section_id_exit_url() {
+			$this->agy_settings_fields( 'url', 'agy-exit-url', 'agy-settings-field', 'exit_url', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exit_url' ) ) ), 'https://domain.com', 'The redirect URL if the exit button was clicked', '', '', 'required' );
 		}
 
 		public function agy_section_id_separator_text() {
