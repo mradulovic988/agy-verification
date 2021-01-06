@@ -46,25 +46,25 @@ Agy has your website performance in mind -  every script and style is minified a
 == Installation ==
 
 = Default Method =
-1. Go to Settings > Plugins in your administrator panel.
-2. Click `Add New`
-3. Search for Agy Verification
-4. Click install.
+* Go to Settings > Plugins in your administrator panel.
+* Click `Add New`
+* Search for Agy Verification
+* Click install.*
 
 = Easy Method =
-1. Download the zip file.
-2. Login to your `Dashboard`
-3. Open your plugins bar and click `Add New`
-4. Click the `upload tab`
-5. Choose `agy-verification` from your downloads folder
-6. Click `Install Now`
-7. All done, now just activate the plugin
-8. Go to Tools -> Agy Verification and configure it ( or simply click on Settings )
-9. Save, and you're all good.
+* Download the zip file.
+* Login to your `Dashboard`
+* Open your plugins bar and click `Add New`
+* Click the `upload tab`
+* Choose `agy-verification` from your downloads folder
+* Click `Install Now`
+* All done, now just activate the plugin
+* Go to Tools -> Agy Verification and configure it ( or simply click on Settings )
+* Save, and you're all good.
 
 = Old Method =
-1. Upload `agy-verification` to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
+* Upload `agy-verification` to the `/wp-content/plugins/` directory
+* Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
