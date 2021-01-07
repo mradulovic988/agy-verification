@@ -1,6 +1,7 @@
 === Agy Verification v-1.0.1 Changelog: ===
 
 - Change and add a tags
+- Add in readme that is multynetwork friendly in features
 - How to use - Exit url is now on the Text page not in General
 - Minify JS and CSS
 - Add ability to create popup and use it with shortcode only
