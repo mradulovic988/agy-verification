@@ -1,6 +1,6 @@
 === Agy verification ===
 Contributors: upss1988
-Tags: age verification, age gate, age restriction, age popup, page gate, content warning
+Tags: age verification, age restriction, age popup, page restriction, content restriction, content verification, verification, restriction
 Requires at least: 4.6
 Requires PHP: 7.2
 Donate link: https://mlab-studio.com
@@ -16,11 +16,13 @@ Simply setup the texts, modify the design and you are ready.
 
 This comes especially handy if your content or products are about CBD, alcohol, gambling, or some other adult content.
 
+[vimeo https://vimeo.com/497790709]
+
 == How to use ==
 
 After activation, move to Tools->Agy Verification and begin to configure your verification settings.
 
-Start with your general settings: turn on / off, set your exit URL and decide if it should apply to registered users or not.
+Start with your general settings: turn on / off, and decide if it should apply to registered users or not.
 
 Move to the text settings and customize all your texts.
 
@@ -30,11 +32,10 @@ Move to the Design section to design your modal popup.
 
 * Let users verify anything on page visit
 * Show the verification only for non-registered users
-* Modify every text, color, background and more
+* Modify everything! Text, color, background and more
 * Redirect failed attempt to a specified page
 * Mobile-friendly design
-
-[vimeo https://vimeo.com/497790709]
+* Multisite friendly
 
 == Support ==
 
