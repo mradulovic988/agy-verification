@@ -5,6 +5,6 @@
 - How to use - Exit url is now on the Text page not in General ***
 - Minify JS and CSS ***
 - Add ability to create popup and use it with shortcode only
-- Page restriction
+- Page restriction ***
 - Update links on plugin
 - Build up a readme.txt

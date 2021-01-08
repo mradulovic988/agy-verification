@@ -37,6 +37,10 @@ Move to the Design section to design your modal popup.
 * Mobile-friendly design
 * Multisite friendly
 
+== 🌟 WHAT’S NEW WITH AGY VERIFICATION ==
+* Page Restriction
+* Shortcode manipulation
+
 == Support ==
 
 The support is exclusively limited to the wordpress.org support forum.
@@ -100,9 +104,12 @@ Yes! You can use Agy Verification for any restriction that you need.
 
 == Changelog ==
 
-= 1.0.0 =
+= [ 1.0.1 ] - 2020.01.08 =
+* New feature: Page Restriction
+* Updated: readme.txt
+
+= [ 1.0.0 ] - 2020.01.06 =
 * Plugin created and published
 
 == Upgrade Notice ==
-= 1.0.0 =
-* Plugin created an published
+Added New Features such as page restriction, shortcode manipulation, etc...
