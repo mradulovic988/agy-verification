@@ -290,6 +290,13 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
+			add_settings_field( 'agy_section_id_shortcode', __( 'Use with shortcode', 'agy' ), array(
+				$this,
+				'agy_section_id_shortcode'
+			), 'agy_settings_section_tab1', 'agy_section_id', array(
+				'class' => 'agy-shortcode'
+			) );
+
 			add_settings_field( 'agy_section_id_page_restriction', __( 'Page restriction', 'agy' ), array(
 				$this,
 				'agy_section_id_page_restriction'
@@ -491,6 +498,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		 * @param string $description Input field description
 		 * @param string $min Input field min attribute
 		 * @param string $max Input field max attribute
+		 * @param string $required Required attribute
 		 */
 		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '' ) {
 			switch ( $type ) {
@@ -526,6 +534,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_section_id_debug_mode() {
 			$this->agy_settings_fields( 'checkbox', 'agy-debug-mode', 'agy-switch-input', 'debug_mode', $this->agy_option_check_radio_btn( 'debug_mode' ), '', 'Turn off the cookie for testing purpose. While the Debug mode is on, "Show for unregistered users only" field will not be usable. Don\'t forget to turn it off when you finish.' );
+		}
+
+		public function agy_section_id_shortcode() {
+			$this->agy_settings_fields( 'checkbox', 'agy-shortcode', 'agy-shortcode', 'shortcode', $this->agy_option_check_radio_btn( 'shortcode' ), '', 'The shortcode will be automatically generated after saving the changes.' );
 		}
 
 		public function agy_section_id_page_restriction() {
