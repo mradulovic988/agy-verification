@@ -290,6 +290,11 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
+			add_settings_field( 'agy_section_id_page_restriction', __( 'Page restriction', 'agy' ), array(
+				$this,
+				'agy_section_id_page_restriction'
+			), 'agy_settings_section_tab1', 'agy_section_id' );
+
 			// Texts page fields
 			add_settings_field( 'agy_section_id_headline', __( 'Headline *', 'agy' ), array(
 				$this,
@@ -521,6 +526,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_section_id_debug_mode() {
 			$this->agy_settings_fields( 'checkbox', 'agy-debug-mode', 'agy-switch-input', 'debug_mode', $this->agy_option_check_radio_btn( 'debug_mode' ), '', 'Turn off the cookie for testing purpose. While the Debug mode is on, "Show for unregistered users only" field will not be usable. Don\'t forget to turn it off when you finish.' );
+		}
+
+		public function agy_section_id_page_restriction() {
+			$this->agy_settings_fields( 'text', 'agy-page-restriction', 'agy-settings-field', 'page_restriction', esc_attr__( sanitize_text_field( $this->agy_options_check( 'page_restriction' ) ) ), 'home, about-us, contact', 'Add a comma separated page slug in order to restrict verification for that specific page.' );
 		}
 
 		// Text page Settings API fields
