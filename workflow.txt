@@ -8,3 +8,4 @@
 - Page restriction ***
 - Update links on plugin
 - Build up a readme.txt
+- Show for specific user role

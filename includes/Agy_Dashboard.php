@@ -50,8 +50,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                     </div>
                     <div class="agy-enter-btn">
                         <button
-                            style="<?= $this->agy_template_styling( 'btn_font_size', 'btn_font_color', 'btn_background_color', '', '', 'btn_border_style', 'btn_border_color' ) ?>"
-                            type="button">
+                                style="<?= $this->agy_template_styling( 'btn_font_size', 'btn_font_color', 'btn_background_color', '', '', 'btn_border_style', 'btn_border_color' ) ?>"
+                                type="button">
 							<?php echo $this->agy_options_check( 'enter_btn' ) ?>
                         </button>
                     </div>
@@ -63,8 +63,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                     <div class="agy-exit-btn">
                         <a href="<?php echo $this->agy_options_check( 'exit_url' ) ?>">
                             <button
-                                style="<?= $this->agy_template_styling( 'exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color', '', '', 'exit_btn_border_style', 'exit_btn_border_color' ) ?>"
-                                type="button"><?php echo $this->agy_options_check( 'exit_btn' ) ?></button>
+                                    style="<?= $this->agy_template_styling( 'exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color', '', '', 'exit_btn_border_style', 'exit_btn_border_color' ) ?>"
+                                    type="button"><?php echo $this->agy_options_check( 'exit_btn' ) ?></button>
                         </a>
                     </div>
                     <div class="agy-footer">
@@ -256,6 +256,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		// Settings API
 		public function agy_register_settings() {
+
 			register_setting( 'agy_settings_fields', 'agy_settings_fields', 'agy_sanitize_callback' );
 
 			// Adding sections
@@ -290,16 +291,14 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_shortcode', __( 'Use with shortcode', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exclude_pages', __( 'Exclude pages', 'agy' ), array(
 				$this,
-				'agy_section_id_shortcode'
-			), 'agy_settings_section_tab1', 'agy_section_id', array(
-				'class' => 'agy-shortcode'
-			) );
+				'agy_section_id_exclude_pages'
+			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_page_restriction', __( 'Page restriction', 'agy' ), array(
+			add_settings_field( 'agy_section_id_user_role', __( 'Exclude specific user role', 'agy' ), array(
 				$this,
-				'agy_section_id_page_restriction'
+				'agy_section_id_user_role'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
 			// Texts page fields
@@ -536,12 +535,12 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			$this->agy_settings_fields( 'checkbox', 'agy-debug-mode', 'agy-switch-input', 'debug_mode', $this->agy_option_check_radio_btn( 'debug_mode' ), '', 'Turn off the cookie for testing purpose. While the Debug mode is on, "Show for unregistered users only" field will not be usable. Don\'t forget to turn it off when you finish.' );
 		}
 
-		public function agy_section_id_shortcode() {
-			$this->agy_settings_fields( 'checkbox', 'agy-shortcode', 'agy-shortcode', 'shortcode', $this->agy_option_check_radio_btn( 'shortcode' ), '', 'The shortcode will be automatically generated after saving the changes.' );
+		public function agy_section_id_exclude_pages() {
+			$this->agy_settings_fields( 'text', 'agy-exclude-pages', 'agy-settings-field', 'exclude_pages', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exclude_pages' ) ) ), 'home, about-us, contact', 'Add a comma separated page slug in order to exclude verification for that specific page.' );
 		}
 
-		public function agy_section_id_page_restriction() {
-			$this->agy_settings_fields( 'text', 'agy-page-restriction', 'agy-settings-field', 'page_restriction', esc_attr__( sanitize_text_field( $this->agy_options_check( 'page_restriction' ) ) ), 'home, about-us, contact', 'Add a comma separated page slug in order to restrict verification for that specific page.' );
+		public function agy_section_id_user_role() {
+			$this->agy_settings_fields( 'text', 'agy-user-role', 'agy-settings-field', 'user_role', esc_attr__( sanitize_text_field( $this->agy_options_check( 'user_role' ) ) ), 'customer, contributor, subscriber', 'Add a comma separated user role slug in order to exclude verification for that specific role.' );
 		}
 
 		// Text page Settings API fields

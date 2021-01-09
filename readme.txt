@@ -38,8 +38,7 @@ Move to the Design section to design your modal popup.
 * Multisite friendly
 
 == 🌟 WHAT’S NEW WITH AGY VERIFICATION ==
-* Page Restriction
-* Shortcode manipulation
+* Exclude pages
 
 == Support ==
 
