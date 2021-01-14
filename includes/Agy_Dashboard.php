@@ -296,11 +296,6 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_section_id_exclude_pages'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_user_role', __( 'Exclude specific user role', 'agy' ), array(
-				$this,
-				'agy_section_id_user_role'
-			), 'agy_settings_section_tab1', 'agy_section_id' );
-
 			// Texts page fields
 			add_settings_field( 'agy_section_id_headline', __( 'Headline *', 'agy' ), array(
 				$this,
@@ -537,10 +532,6 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_section_id_exclude_pages() {
 			$this->agy_settings_fields( 'text', 'agy-exclude-pages', 'agy-settings-field', 'exclude_pages', esc_attr__( sanitize_text_field( $this->agy_options_check( 'exclude_pages' ) ) ), 'home, about-us, contact', 'Add a comma separated page slug in order to exclude verification for that specific page.' );
-		}
-
-		public function agy_section_id_user_role() {
-			$this->agy_settings_fields( 'text', 'agy-user-role', 'agy-settings-field', 'user_role', esc_attr__( sanitize_text_field( $this->agy_options_check( 'user_role' ) ) ), 'customer, contributor, subscriber', 'Add a comma separated user role slug in order to exclude verification for that specific role.' );
 		}
 
 		// Text page Settings API fields

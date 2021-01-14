@@ -16,41 +16,24 @@ if ( ! class_exists( 'Agy_Public' ) ) {
 				add_action( 'wp_enqueue_scripts', array( $this, 'agy_enqueue_public_styles' ) );
 
 				// If the plugin disabled it will not appear on the front-end
-				if ( $this->agy_options_check( 'enabled_disabled' ) != 0 && empty( $this->agy_options_check( 'page_restriction' ) ) ) {
+				if ( $this->agy_options_check( 'enabled_disabled' ) != 0 && empty( $this->agy_options_check( 'exclude_pages' ) ) ) {
 					add_action( 'wp_head', array( $this, 'agy_template' ) );
 				}
 
 				// If the page restriction fields is match with the visiting page
-				if ( $this->agy_options_check( 'enabled_disabled' ) != 0 && ! empty( $this->agy_options_check( 'page_restriction' ) ) ) {
+				if ( $this->agy_options_check( 'enabled_disabled' ) != 0 && ! empty( $this->agy_options_check( 'exclude_pages' ) ) ) {
 					add_action( 'wp_head', array( $this, 'agy_check_restriction_pages' ) );
 				}
 
-				add_action( 'wp_head', array( $this, 'agy_check_excluded_user_role' ) );
+
 			}
 		}
 
-		//
 		public function agy_check_restriction_pages() {
-			$page_restriction_fields = explode( ', ', $this->agy_options_check( 'page_restriction' ) );
+			$page_restriction_fields = explode( ', ', $this->agy_options_check( 'exclude_pages' ) );
 			if ( is_page( $page_restriction_fields ) != $page_restriction_fields ) {
 				$this->agy_template();
 			}
-		}
-
-		public function agy_check_excluded_user_role() {
-//			$user_role_fields = $this->agy_options_check('user_role');
-//			$current_user = wp_get_current_user();
-//			$user_roles = $current_user->roles;
-//
-//			foreach ( $user_roles as $user_role ) {
-//				echo $user_role . '<br>';
-//				echo $user_role_fields;
-//
-//				if( $user_role != $user_role_fields) {
-//					$this->agy_template();
-//				}
-//			}
-
 		}
 
 		public function agy_enqueue_public_styles() {
