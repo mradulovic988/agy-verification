@@ -13,7 +13,7 @@
  * Description:       Agy Verification is a powerful solution to add any kind of verification restriction on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
  * Version:           1.0.1
  * Requires at least: 4.6
- * Requires PHP:      7.2
+ * Requires PHP:      7.1
  * Author:            Marko Radulovic
  * Author URI:        https://mlab-studio.com/
  * Text Domain:       agy

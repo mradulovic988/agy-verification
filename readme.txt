@@ -2,7 +2,7 @@
 Contributors: upss1988
 Tags: age verification, age restriction, age popup, page restriction, content restriction, content verification, verification, restriction
 Requires at least: 4.6
-Requires PHP: 7.2
+Requires PHP: 7.1
 Donate link: https://mlab-studio.com
 Tested up to: 5.6
 Stable tag: 1.0.1
@@ -104,8 +104,7 @@ Yes! You can use Agy Verification for any restriction that you need.
 == Changelog ==
 
 = [ 1.0.1 ] - 2020.01.08 =
-* New feature: Page Restriction
-* Updated: readme.txt
+* New feature: Exclude Page
 
 = [ 1.0.0 ] - 2020.01.06 =
 * Plugin created and published
