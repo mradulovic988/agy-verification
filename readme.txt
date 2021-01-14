@@ -16,7 +16,7 @@ Simply setup the texts, modify the design and you are ready.
 
 This comes especially handy if your content or products are about CBD, alcohol, gambling, or some other adult content.
 
-[vimeo https://vimeo.com/497790709]
+[vimeo https://vimeo.com/500408054]
 
 == How to use ==
 

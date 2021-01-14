@@ -24,11 +24,10 @@ if ( ! class_exists( 'Agy_Public' ) ) {
 				if ( $this->agy_options_check( 'enabled_disabled' ) != 0 && ! empty( $this->agy_options_check( 'exclude_pages' ) ) ) {
 					add_action( 'wp_head', array( $this, 'agy_check_restriction_pages' ) );
 				}
-
-
 			}
 		}
 
+		// Condition for page exclude
 		public function agy_check_restriction_pages() {
 			$page_restriction_fields = explode( ', ', $this->agy_options_check( 'exclude_pages' ) );
 			if ( is_page( $page_restriction_fields ) != $page_restriction_fields ) {
