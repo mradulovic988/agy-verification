@@ -28,7 +28,7 @@ Move to the text settings and customize all your texts.
 
 Move to the Design section to design your modal popup.
 
-== Features ==
+== 🔥 Features ==
 
 * Let users verify anything on page visit
 * Show the verification only for non-registered users
@@ -44,7 +44,7 @@ Move to the Design section to design your modal popup.
 
 The support is exclusively limited to the wordpress.org support forum.
 
-=== CODING STANDARDS ===
+=== 🔝 CODING STANDARDS ===
 
 Agy is coded with modern PHP, JavaScript and WordPress standards in mind. It’s fully OOP coded.
 Agy has your website performance in mind -  every script and style is minified and loaded conditionally.
