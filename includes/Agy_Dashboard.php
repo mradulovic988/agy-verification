@@ -177,6 +177,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                 <button class="agy-tablinks" onclick="openTab(event, 'agy-tab2')"><?php _e( 'Text', 'agy' ) ?></button>
                 <button class="agy-tablinks"
                         onclick="openTab(event, 'agy-tab3')"><?php _e( 'Design', 'agy' ) ?></button>
+                <button class="agy-tablinks"
+                        onclick="openTab(event, 'agy-tab4')"><?php _e( 'WooCommerce', 'agy' ) ?></button>
             </div>
 			<?php
 		}
@@ -217,6 +219,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 						<?php do_settings_sections( 'agy_settings_section_tab3' ); ?>
                     </div>
 
+                    <div id="agy-tab4" class="agy-tabcontent">
+						<?php do_settings_sections( 'agy_settings_section_tab4' ); ?>
+                    </div>
+
 					<?php
 					submit_button(
 						__( 'Save Changes', 'agy' ),
@@ -254,6 +260,11 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			_e( 'Set the desirable design for the modal verification.', 'agy' );
 		}
 
+		public function agy_settings_section_tab4_callback() {
+			// CHANGE DESCRIPTION LATER
+			_e( 'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.', 'agy' );
+		}
+
 		// Settings API
 		public function agy_register_settings() {
 
@@ -274,6 +285,11 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				$this,
 				'agy_settings_section_tab3_callback'
 			), 'agy_settings_section_tab3' );
+
+			add_settings_section( 'agy_section_id', __( 'WooCommerce', 'agy' ), array(
+				$this,
+				'agy_settings_section_tab4_callback'
+			), 'agy_settings_section_tab4' );
 
 			// General page fields
 			add_settings_field( 'agy_section_id_enabled_disabled', __( 'Enable / Disable', 'agy' ), array(
@@ -452,6 +468,27 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				$this,
 				'agy_section_id_slogan_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
+
+			// WooCommerce page fields
+			add_settings_field( 'agy_section_id_wc_verification_checkbox_registration', __( 'Add a verification checkbox to the registration', 'agy' ), array(
+				$this,
+				'agy_section_id_wc_verification_checkbox_registration'
+			), 'agy_settings_section_tab4', 'agy_section_id' );
+
+			add_settings_field( 'agy_section_id_wc_verification_checkbox', __( 'Add a verification checkbox to the checkout', 'agy' ), array(
+				$this,
+				'agy_section_id_wc_verification_checkbox'
+			), 'agy_settings_section_tab4', 'agy_section_id' );
+
+			add_settings_field( 'agy_section_id_wc_verification_customer_account', __( 'Save Information in customer account', 'agy' ), array(
+				$this,
+				'agy_section_id_wc_verification_customer_account'
+			), 'agy_settings_section_tab4', 'agy_section_id' );
+
+			add_settings_field( 'agy_section_id_wc_verification_message', __( 'Save Information in customer account', 'agy' ), array(
+				$this,
+				'agy_section_id_wc_verification_message'
+			), 'agy_settings_section_tab4', 'agy_section_id' );
 		}
 
 		/**
@@ -658,6 +695,23 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_section_id_slogan_font_size() {
 			$this->agy_settings_fields( 'number', 'agy-slogan-font-size', 'agy-settings-field', 'slogan_font_size', esc_attr__( sanitize_text_field( $this->agy_options_check( 'slogan_font_size' ) ) ), '16' );
+		}
+
+		// WooCommerce page Settings API fields
+		public function agy_section_id_wc_verification_checkbox_registration() {
+			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox-registration', 'agy-switch-input', 'agy_wc_verification_checkbox_registration', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox_registration' ) );
+		}
+
+		public function agy_section_id_wc_verification_checkbox() {
+			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox', 'agy-switch-input', 'agy_wc_verification_checkbox', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox' ) );
+		}
+
+		public function agy_section_id_wc_verification_customer_account() {
+			$this->agy_settings_fields( 'checkbox', 'agy-wc_verification_customer_account', 'agy-switch-input', 'wc_verification_customer_account', $this->agy_option_check_radio_btn( 'wc_verification_customer_account' ) );
+		}
+
+		public function agy_section_id_wc_verification_message() {
+			$this->agy_settings_fields( 'text', 'agy-wc-verification-message', 'agy-settings-color', 'wc_verification_message', esc_attr__( sanitize_text_field( $this->agy_options_check( 'wc_verification_message' ) ) ), 'I aggree to the Terms of service', 'Message which will be displayed on registration, checkout and customer account page.' );
 		}
 	}
 
