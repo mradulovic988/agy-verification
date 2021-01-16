@@ -7,11 +7,10 @@
  * @version 1.0.0
  * @author Marko Radulovic
  */
-include_once AGY_PLUGIN_PATH . '/includes/Agy_Wc.php';
 
 if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
-	class Agy_Dashboard extends Agy_Wc {
+	class Agy_Dashboard {
 		public function __construct() {
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( $this, 'agy_dashboard' ) );
@@ -532,7 +531,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		 * @param string $max Input field max attribute
 		 * @param string $required Required attribute
 		 */
-		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '' ) {
+		protected function agy_settings_fields( string $type, string $id, string $class, string $name, string $value, $placeholder = '', $description = '', $min = '', $max = '', $required = '') {
 			switch ( $type ) {
 				case 'text':
 					echo '<input type="text" id="' . $id . '" class="' . $class . '" name="agy_settings_fields[' . $name . ']" value="' . $value . '" placeholder="' . __( $placeholder, 'agy' ) . '" ' . $required . '><small class="agy-field-desc">' . __( $description, 'agy' ) . '</small>';
@@ -700,19 +699,19 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		// WooCommerce page Settings API fields
 		public function agy_section_id_wc_verification_checkbox_registration() {
-			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox-registration', 'agy-switch-input', 'agy_wc_verification_checkbox_registration', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox_registration' ) );
+			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox-registration', 'agy-switch-input is-disabled', 'agy_wc_verification_checkbox_registration', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox_registration' ) );
 		}
 
 		public function agy_section_id_wc_verification_checkbox() {
-			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox', 'agy-switch-input', 'agy_wc_verification_checkbox', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox' ) );
+			$this->agy_settings_fields( 'checkbox', 'agy-wc-verification-checkbox', 'agy-switch-input is-disabled', 'agy_wc_verification_checkbox', $this->agy_option_check_radio_btn( 'agy_wc_verification_checkbox' ) );
 		}
 
 		public function agy_section_id_wc_verification_customer_account() {
-			$this->agy_settings_fields( 'checkbox', 'agy-wc_verification_customer_account', 'agy-switch-input', 'wc_verification_customer_account', $this->agy_option_check_radio_btn( 'wc_verification_customer_account' ) );
+			$this->agy_settings_fields( 'checkbox', 'agy-wc_verification_customer_account', 'agy-switch-input is-disabled', 'wc_verification_customer_account', $this->agy_option_check_radio_btn( 'wc_verification_customer_account' ) );
 		}
 
 		public function agy_section_id_wc_verification_message() {
-			$this->agy_settings_fields( 'text', 'agy-wc-verification-message', 'agy-settings-color', 'wc_verification_message', esc_attr__( sanitize_text_field( $this->agy_options_check( 'wc_verification_message' ) ) ), 'I aggree to the Terms of service', 'Message which will be displayed on registration, checkout and customer account page.' );
+			$this->agy_settings_fields( 'text', 'agy-wc-verification-message', 'agy-settings-color is-disabled', 'wc_verification_message', esc_attr__( sanitize_text_field( $this->agy_options_check( 'wc_verification_message' ) ) ), 'I aggree to the Terms of service', 'Message which will be displayed on registration, checkout and customer account page.' );
 		}
 	}
 
