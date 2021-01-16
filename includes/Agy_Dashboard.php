@@ -7,10 +7,11 @@
  * @version 1.0.0
  * @author Marko Radulovic
  */
+include_once AGY_PLUGIN_PATH . '/includes/Agy_Wc.php';
 
 if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
-	class Agy_Dashboard {
+	class Agy_Dashboard extends Agy_Wc {
 		public function __construct() {
 			if ( is_admin() ) {
 				add_action( 'admin_menu', array( $this, 'agy_dashboard' ) );
