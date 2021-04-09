@@ -1,0 +1,4 @@
+=== Agy Verification v-1.0.1 Changelog: ===
+
+- Add ability to create popup and use it with shortcode only
+- Show for specific user role

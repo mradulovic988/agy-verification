@@ -104,7 +104,9 @@ Yes! You can use Agy Verification for any restriction that you need.
 == Changelog ==
 
 = [ 1.0.4 ] - 2021.08.04 =
-*
+* Added path=/ in the cookie to make the age verification to the whole site
+* Fixed issue with searching plugin
+* Fixed compatibility with latest version of WordPress
 
 = [ 1.0.3 ] - 2021.06.03 =
 * Fix: Fix compatibility with latest version of WordPress
@@ -119,4 +121,4 @@ Yes! You can use Agy Verification for any restriction that you need.
 * Plugin created and published
 
 == Upgrade Notice ==
-Fix compatibility with latest version of WordPress
+Fix compatibility with latest version of WordPress and searching for a plugins
