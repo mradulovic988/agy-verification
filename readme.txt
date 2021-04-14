@@ -5,7 +5,7 @@ Requires at least: 4.6
 Requires PHP: 7.1
 Donate link: https://mlab-studio.com
 Tested up to: 5.7
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 License: GPL v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
