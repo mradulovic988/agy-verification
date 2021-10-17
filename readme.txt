@@ -5,7 +5,7 @@ Requires at least: 4.6
 Requires PHP: 7.1
 Donate link: https://mlab-studio.com
 Tested up to: 5.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPL v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -16,7 +16,7 @@ Simply setup the texts, modify the design and you are ready to go.
 
 This comes especially handy if your content or products are about CBD, alcohol, gambling, or some other adult content.
 
-[vimeo https://vimeo.com/500408054]
+[vimeo https://vimeo.com/634297863]
 
 == How to use ==
 
