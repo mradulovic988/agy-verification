@@ -174,7 +174,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
                 <div class="agy-tab-right">
                     <span class="agy-version"><?php echo $this->agy_header_links( 'Give us 5 stars', 'https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post', '_blank', 'agy-tablinks' ); ?></span>
                     <span class="agy-version"><?php echo $this->agy_header_links( 'Support', 'https://wordpress.org/support/plugin/agy-verification', '_blank', 'agy-tablinks' ); ?></span>
-                    <span class="agy-version">Version: <?php _e( AGY_PLUGIN_VERSION, 'agy' ) ?></span>
+                    <span class="agy-version"><?php _e('Version: ', 'agy') . _e( AGY_PLUGIN_VERSION, 'agy' ) ?></span>
                 </div>
 
             </div>
