@@ -1,11 +1,11 @@
 === Agy verification ===
 Contributors: upss1988, mlabstudio
 Tags: age verification, age restriction, age popup, page restriction, content restriction, content verification, verification, restriction
-Requires at least: 4.6
-Requires PHP: 7.1
+Requires at least: 5.6
+Requires PHP: 7.4
 Donate link: https://mlab-studio.com
-Tested up to: 6.1
-Stable tag: 1.1.7
+Tested up to: 6.2
+Stable tag: 1.1.8
 License: GPL v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.txt
 
@@ -111,6 +111,14 @@ Yes! You can use Agy Verification for any restriction that you need.
 4. Front-end view
 
 == Changelog ==
+= [ 1.1.8 ] - 2023.10.04 =
+* Added PHP version checker
+* Added WordPress version checker
+* Changed \Agy class to final class
+* Added support for WooCommerce
+* Moved text domain to constant
+
+
 = [ 1.1.7 ] - 2023.15.01 =
 * Update plugin with the latest version of WordPress
 
@@ -151,4 +159,4 @@ Yes! You can use Agy Verification for any restriction that you need.
 * Plugin created and published
 
 == Upgrade Notice ==
-Agy Verification major update. Changed UI/UX, fully AJAX, fixed bugs, and improved coding style and plugin performance.
+Agy Verification major release

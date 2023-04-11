@@ -11,9 +11,9 @@
  * Plugin Name:       Agy Verification
  * Plugin URI:        https://wordpress.org/plugins/agy-verification
  * Description:       Agy Verification is a powerful solution to add any kind of verification restriction on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
- * Version:           1.1.7
- * Requires at least: 4.6
- * Requires PHP:      7.1
+ * Version:           1.1.8
+ * Requires at least: 5.6
+ * Requires PHP:      7.4
  * Author:            Marko Radulovic
  * Author URI:        https://mlab-studio.com/
  * Text Domain:       agy
@@ -28,19 +28,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'Agy' ) ) {
 
-	class Agy {
+	/**
+	 * Main final class
+	 *
+	 * @since 1.1.8
+	 */
+	final class Agy {
+		private static ?self $instance = null;
+
 		public function __construct() {
 			if ( ! defined( 'AGY_PLUGIN_PATH' ) ) {
 				define( 'AGY_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 			}
 
 			if ( ! defined( 'AGY_PLUGIN_VERSION' ) ) {
-				define( 'AGY_PLUGIN_VERSION', '1.1.7' );
+				define( 'AGY_PLUGIN_VERSION', '1.1.8' );
 			}
 
 			if ( ! defined( 'AGY_PLUGIN_BASENAME' ) ) {
 				define( 'AGY_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 			}
+
+			if ( ! defined( 'AGY_MINIMAL_PHP_VERSION' ) ) {
+				define( 'AGY_MINIMAL_PHP_VERSION', 7.4 );
+			}
+
+			if ( ! defined( 'AGY_MINIMAL_WP_VERSION' ) ) {
+				define( 'AGY_MINIMAL_WP_VERSION', 5.6 );
+			}
+
+			if ( ! defined( 'AGY_TEXT_DOMAIN' ) ) {
+				define( 'AGY_TEXT_DOMAIN', 'agy' );
+			}
+
+			register_activation_hook( __FILE__, array( $this, 'agy_minimal_requirements' ) );
 
 			if ( is_admin() ) {
 				include AGY_PLUGIN_PATH . '/includes/Agy_Dashboard.php';
@@ -55,9 +76,33 @@ if ( ! class_exists( 'Agy' ) ) {
 			}
 		}
 
+		public function agy_minimal_requirements(): void {
+			global $wp_version;
+
+			if ( version_compare( PHP_VERSION, AGY_MINIMAL_PHP_VERSION, '<' ) ) {
+				deactivate_plugins( AGY_PLUGIN_BASENAME );
+
+				wp_die( sprintf(
+					__( 'Plugin requires at least PHP version %s. You are running version %s. Please upgrade and try again.', AGY_TEXT_DOMAIN ),
+					AGY_MINIMAL_PHP_VERSION,
+					PHP_VERSION
+				) );
+			}
+
+			if ( version_compare( $wp_version, AGY_MINIMAL_WP_VERSION, "<" ) ) {
+				deactivate_plugins( AGY_PLUGIN_BASENAME );
+
+				wp_die( sprintf(
+					__( 'Plugin requires at least WordPress version %s. You are running version %s. Please upgrade and try again.', AGY_TEXT_DOMAIN ),
+					AGY_MINIMAL_WP_VERSION,
+					$wp_version
+				) );
+			}
+		}
+
 		public function agy_load_plugin_textdomain() {
 			load_plugin_textdomain(
-				'agy',
+				AGY_TEXT_DOMAIN,
 				false,
 				AGY_PLUGIN_BASENAME . dirname( __FILE__ ) . '/languages'
 			);
@@ -70,7 +115,7 @@ if ( ! class_exists( 'Agy' ) ) {
 			if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
 				array_unshift(
 					$links,
-					sprintf( '<a href="%s">' . __( 'Settings', 'agy' ), 'tools.php?page=agy-dashboard' ) . '</a>'
+					sprintf( '<a href="%s">' . __( 'Settings', AGY_TEXT_DOMAIN ), 'tools.php?page=agy-dashboard' ) . '</a>'
 				);
 			}
 
@@ -82,20 +127,21 @@ if ( ! class_exists( 'Agy' ) ) {
 			$plugin = plugin_basename( __FILE__ );
 
 			if ( $file == $plugin && current_user_can( 'manage_options' ) ) {
-				array_push(
-					$links,
-					sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', 'agy' ) . '</a>', 'https://wordpress.org/support/plugin/agy-verification' )
-				);
-
-				array_push(
-					$links,
-					sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', 'agy' ) . '</a>', 'https://github.com/mradulovic988/agy-verification' )
-				);
+				$links[] = sprintf( '<a target="_blank" href="%s">' . __( 'Docs & FAQs', AGY_TEXT_DOMAIN ) . '</a>', 'https://wordpress.org/support/plugin/agy-verification' );
+				$links[] = sprintf( '<a target="_blank" href="%s">' . __( 'GitHub', AGY_TEXT_DOMAIN ) . '</a>', 'https://github.com/mradulovic988/agy-verification' );
 			}
 
 			return $links;
 		}
+
+		public static function agy_instance(): self {
+			if ( null === self::$instance ) {
+				self::$instance = new self();
+			}
+
+			return self::$instance;
+		}
 	}
 
-	new Agy();
+	Agy::agy_instance();
 }

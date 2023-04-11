@@ -23,61 +23,61 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 		public function agy_show_error_notice() {
 			if ( isset( $_GET['settings-updated'] ) ) {
-				$message = __( 'You have successfully saved your settings.', 'agy' );
+				$message = __( 'You have successfully saved your settings.', AGY_TEXT_DOMAIN );
 				add_settings_error( 'agy_settings_fields', 'success', $message, 'success' );
 			}
 		}
 
 		// Front-end modal template
 		public function agy_modal_template() { ?>
-            <div style="<?= $this->agy_template_styling( '', '', '', 'z_index' ) ?>" id="agy-my-modal"
-                    class="agy-modal">
-                <div style="<?= $this->agy_template_styling( '', '', 'background_color', '', 'box_width' ) ?>"
-                        class="agy-modal-content">
-                    <div class="agy-headline">
-                        <p style="<?= $this->agy_template_styling( 'headline_font_size', 'headline_color' ) ?>">
+			<div style="<?= $this->agy_template_styling( '', '', '', 'z_index' ) ?>" id="agy-my-modal"
+			     class="agy-modal">
+				<div style="<?= $this->agy_template_styling( '', '', 'background_color', '', 'box_width' ) ?>"
+				     class="agy-modal-content">
+					<div class="agy-headline">
+						<p style="<?= $this->agy_template_styling( 'headline_font_size', 'headline_color' ) ?>">
 							<?php echo $this->agy_options_check( 'headline' ) ?>
-                        </p>
-                        <div class="agy-separator-horizontal-line"></div>
-                    </div>
-                    <div class="agy-subtitle">
-                        <p style="<?= $this->agy_template_styling( 'subtitle_font_size', 'subtitle_color' ) ?>">
+						</p>
+						<div class="agy-separator-horizontal-line"></div>
+					</div>
+					<div class="agy-subtitle">
+						<p style="<?= $this->agy_template_styling( 'subtitle_font_size', 'subtitle_color' ) ?>">
 							<?php echo $this->agy_options_check( 'subtitle' ) ?>
-                        </p>
-                    </div>
-                    <div class="agy-description">
-                        <p style="<?= $this->agy_template_styling( 'message_font_size', 'message_color' ) ?>">
+						</p>
+					</div>
+					<div class="agy-description">
+						<p style="<?= $this->agy_template_styling( 'message_font_size', 'message_color' ) ?>">
 							<?php echo $this->agy_options_check( 'message' ) ?>
-                        </p>
-                    </div>
-                    <div class="agy-btn-wrapper">
-                        <div class="agy-enter-btn">
-                            <button
-                                    style="<?= $this->agy_template_styling( 'btn_font_size', 'btn_font_color', 'btn_background_color', '', '', 'btn_border_style', 'btn_border_color' ) ?>"
-                                    type="button">
+						</p>
+					</div>
+					<div class="agy-btn-wrapper">
+						<div class="agy-enter-btn">
+							<button
+								style="<?= $this->agy_template_styling( 'btn_font_size', 'btn_font_color', 'btn_background_color', '', '', 'btn_border_style', 'btn_border_color' ) ?>"
+								type="button">
 								<?php echo $this->agy_options_check( 'enter_btn' ) ?>
-                            </button>
-                        </div>
-                        <div class="agy-separator">
-                            <p style="<?= $this->agy_template_styling( 'separator_font_size', 'separator_color' ) ?>">
+							</button>
+						</div>
+						<div class="agy-separator">
+							<p style="<?= $this->agy_template_styling( 'separator_font_size', 'separator_color' ) ?>">
 								<?php echo $this->agy_options_check( 'separator_text' ) ?>
-                            </p>
-                        </div>
-                        <div class="agy-exit-btn">
-                            <a href="<?php echo $this->agy_options_check( 'exit_url' ) ?>">
-                                <button
-                                        style="<?= $this->agy_template_styling( 'exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color', '', '', 'exit_btn_border_style', 'exit_btn_border_color' ) ?>"
-                                        type="button"><?php echo $this->agy_options_check( 'exit_btn' ) ?></button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="agy-footer">
-                        <p style="<?= $this->agy_template_styling( 'slogan_font_size', 'slogan_color' ) ?>">
+							</p>
+						</div>
+						<div class="agy-exit-btn">
+							<a href="<?php echo $this->agy_options_check( 'exit_url' ) ?>">
+								<button
+									style="<?= $this->agy_template_styling( 'exit_btn_font_size', 'exit_btn_font_color', 'exit_btn_background_color', '', '', 'exit_btn_border_style', 'exit_btn_border_color' ) ?>"
+									type="button"><?php echo $this->agy_options_check( 'exit_btn' ) ?></button>
+							</a>
+						</div>
+					</div>
+					<div class="agy-footer">
+						<p style="<?= $this->agy_template_styling( 'slogan_font_size', 'slogan_color' ) ?>">
 							<?php echo $this->agy_options_check( 'slogan' ) ?>
-                        </p>
-                    </div>
-                </div>
-            </div>
+						</p>
+					</div>
+				</div>
+			</div>
 			<?php
 		}
 
@@ -94,7 +94,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		protected function agy_header_links( string $header_text, string $header_url, $header_target = '', $header_class = '' ): string {
 			return sprintf(
 				wp_kses(
-					__( '<a href="%s" target="%s" class="%s">' . $header_text . '</a>', 'agy' ),
+					__( '<a href="%s" target="%s" class="%s">' . $header_text . '</a>', AGY_TEXT_DOMAIN ),
 					array(
 						'a' => array(
 							'href'   => array(),
@@ -105,8 +105,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				),
 
 				esc_url( $header_url ),
-				__( $header_target, 'agy' ),
-				__( $header_class, 'agy' )
+				__( $header_target, AGY_TEXT_DOMAIN ),
+				__( $header_class, AGY_TEXT_DOMAIN )
 			);
 		}
 
@@ -138,20 +138,23 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		// Header menu for admin template
 		protected function agy_header_tabs() {
 			?>
-            <div class="agy-tab">
-                <div class="agy-tab-left">
+			<div class="agy-tab">
+				<div class="agy-tab-left">
                 <span id="agy-default-open" class="agy-tablinks"
-                        onclick="openTab(event, 'agy-tab1')"><?php _e( 'GENERAL', 'agy' ) ?></span>
-                    <span class="agy-tablinks" onclick="openTab(event, 'agy-tab2')"><?php _e( 'TEXT', 'agy' ) ?></span>
-                    <span class="agy-tablinks"
-                            onclick="openTab(event, 'agy-tab3')"><?php _e( 'DESIGN', 'agy' ) ?></span>
-                </div>
-                <div class="agy-tab-center">
+                      onclick="openTab(event, 'agy-tab1')"><?php _e( 'GENERAL', AGY_TEXT_DOMAIN ) ?></span>
+					<span class="agy-tablinks"
+					      onclick="openTab(event, 'agy-tab2')"><?php _e( 'TEXT', AGY_TEXT_DOMAIN ) ?></span>
+					<span class="agy-tablinks"
+					      onclick="openTab(event, 'agy-tab3')"><?php _e( 'DESIGN', AGY_TEXT_DOMAIN ) ?></span>
+					<span class="agy-tablinks"
+					      onclick="openTab(event, 'agy-tab4')"><?php _e( 'STATUS LOG', AGY_TEXT_DOMAIN ) ?></span>
+				</div>
+				<div class="agy-tab-center">
 					<?php
 					// Logo
 					echo sprintf(
 						wp_kses(
-							__( '<a href="%s" target="%s"><img src="%s" class="%s"></a>', 'agy' ),
+							__( '<a href="%s" target="%s"><img src="%s" class="%s"></a>', AGY_TEXT_DOMAIN ),
 							array(
 								'a'   => array(
 									'href'   => array(),
@@ -165,25 +168,28 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 						),
 
 						esc_url( 'https://mlab-studio.com' ),
-						__( '_blank', 'agy' ),
+						__( '_blank', AGY_TEXT_DOMAIN ),
 						plugins_url( '../admin/assets/img/agy-logo.png', __FILE__ ),
-						__( 'agy-logo', 'agy' )
+						__( 'agy-logo', AGY_TEXT_DOMAIN )
 					);
 					?>
-                </div>
-                <div class="agy-tab-right">
-                    <span class="agy-version"><?php echo $this->agy_header_links( 'Give us 5 stars', 'https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post', '_blank', 'agy-tablinks' ); ?></span>
-                    <span class="agy-version"><?php echo $this->agy_header_links( 'Support', 'https://wordpress.org/support/plugin/agy-verification', '_blank', 'agy-tablinks' ); ?></span>
-                    <span class="agy-version"><?php _e('Version: ', 'agy') . _e( AGY_PLUGIN_VERSION, 'agy' ) ?></span>
-                </div>
+				</div>
+				<div class="agy-tab-right">
+					<span
+						class="agy-version"><?php echo $this->agy_header_links( 'Give us 5 stars', 'https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post', '_blank', 'agy-tablinks' ); ?></span>
+					<span
+						class="agy-version"><?php echo $this->agy_header_links( 'Support', 'https://wordpress.org/support/plugin/agy-verification', '_blank', 'agy-tablinks' ); ?></span>
+					<span
+						class="agy-version"><?php _e( 'Version: ', AGY_TEXT_DOMAIN ) . _e( AGY_PLUGIN_VERSION, AGY_TEXT_DOMAIN ) ?></span>
+				</div>
 
-            </div>
+			</div>
 			<?php
 		}
 
 		// Adding submenu page
 		public function agy_dashboard() {
-			add_submenu_page( 'tools.php', __( 'Agy Verification', 'agy' ), __( 'Agy Verification', 'agy' ), 'manage_options', 'agy-dashboard', array(
+			add_submenu_page( 'tools.php', __( 'Agy Verification', AGY_TEXT_DOMAIN ), __( 'Agy Verification', AGY_TEXT_DOMAIN ), 'manage_options', 'agy-dashboard', array(
 				$this,
 				'agy_dashboard_page'
 			) );
@@ -192,12 +198,12 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		// Main form on admin part
 		public function agy_dashboard_page() {
 			?>
-            <style>div#wpwrap {
+			<style>div#wpwrap {
                     background: #F3F6FB;
                 }</style>
-            <div id="agy-wrap" class="wrap">
+			<div id="agy-wrap" class="wrap">
 				<?php $this->agy_header_tabs(); ?>
-                <form id="agy-form-submit" action="options.php" method="post">
+				<form id="agy-form-submit" action="options.php" method="post">
 
 					<?php
 					settings_errors( 'agy_settings_fields' );
@@ -205,21 +211,80 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					settings_fields( 'agy_settings_fields' );
 					?>
 
-                    <div id="agy-tab1" class="agy-tabcontent">
+					<div id="agy-tab1" class="agy-tabcontent">
 						<?php do_settings_sections( 'agy_settings_section_tab1' ); ?>
-                    </div>
+					</div>
 
-                    <div id="agy-tab2" class="agy-tabcontent">
+					<div id="agy-tab2" class="agy-tabcontent">
 						<?php do_settings_sections( 'agy_settings_section_tab2' ); ?>
-                    </div>
+					</div>
 
-                    <div id="agy-tab3" class="agy-tabcontent">
+					<div id="agy-tab3" class="agy-tabcontent">
 						<?php do_settings_sections( 'agy_settings_section_tab3' ); ?>
-                    </div>
+					</div>
+
+					<div id="agy-tab4" class="agy-tabcontent">
+						<?php
+						global $wpdb;
+						do_settings_sections( 'agy_settings_section_tab4' );
+						$wp_version          = get_bloginfo( 'version' );
+						$php_version         = phpversion();
+						$mysql_version       = $wpdb->db_version();
+						$debug_enabled       = WP_DEBUG ? 'true' : 'false';
+						$error_log           = ini_get( 'error_log' );
+						$latest_version      = defined( 'AGY_PLUGIN_VERSION' ) ? AGY_PLUGIN_VERSION : '';
+						$memory_limit        = ini_get( 'memory_limit' );
+						$upload_max_filesize = ini_get( 'upload_max_filesize' );
+						$post_max_size       = ini_get( 'post_max_size' );
+						$max_execution_time  = ini_get( 'max_execution_time' );
+						$max_input_time      = ini_get( 'max_input_time' );
+						$output              = '';
+						$output              .= '<h2>Site Status</h2>';
+						$output              .= '<ul>';
+						$output              .= '<li>WordPress Version: ' . $wp_version . ' (' . get_core_updates()['0']->response . ')</li>';
+						$output              .= '<li>PHP Version: ' . $php_version . '</li>';
+						$output              .= '<li>MySQL Version: ' . $mysql_version . '</li>';
+						$output              .= '<li>Debug Mode: ' . $debug_enabled . '</li>';
+						$output              .= '<li>PHP Error Log: ' . $error_log . '</li>';
+						$output              .= '<li>Plugin Version: ' . $latest_version . '</li>';
+						$output              .= '<li>PHP Memory Limit: ' . $memory_limit . '</li>';
+						$output              .= '<li>Upload File size Limit: ' . $upload_max_filesize . '</li>';
+						$output              .= '<li>Post max size Limit: ' . $post_max_size . '</li>';
+						$output              .= '<li>Max execution time Limit: ' . $max_execution_time . '</li>';
+						$output              .= '<li>Max input time Limit: ' . $max_input_time . '</li>';
+						$output              .= '</ul>';
+						$output              .= '<button type="button" class="button" onclick="copyToClipboard()">Copy to Clipboard</button>';
+						$output              .= '<div class="agy-copied-message">';
+						$output              = '<div id="site-status">' . $output . '</div>';
+						echo $output;
+						?>
+					</div>
+
+					<script>
+					function copyToClipboard() {
+						var copyText = document.createElement("textarea");
+						copyText.value = document.querySelector("#site-status").innerHTML.trim()
+							.replace(/<\/li>/g, "\n").replace(/<li>/g, "")
+							.replace(/<\/h2>/g, "\n").replace(/<h2>/g, "")
+							.replace(/<\/ul>/g, "\n").replace(/<ul>/g, "")
+							.replace(/<\/div>/g, "\n").replace(/<div>/g, "")
+							.replace(/<\/button>/g, "\n").replace(/<button>/g, "");
+						document.body.appendChild(copyText);
+						copyText.select();
+						document.execCommand("copy");
+						document.body.removeChild(copyText);
+						var message = document.querySelector("div.agy-copied-message");
+						message.innerHTML = "Copied!";
+						// document.body.appendChild(message);
+						setTimeout(function () {
+							message.remove();
+						}, 2000);
+					}
+					</script>
 
 					<?php
 					submit_button(
-						__( 'Save Changes', 'agy' ),
+						__( 'Save Changes', AGY_TEXT_DOMAIN ),
 						'',
 						'agy_save_changes_btn',
 						true,
@@ -231,7 +296,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					}
 					?>
 
-                </form>
+				</form>
 
 				<?php
 				if ( ! isset( $_POST['agy_form_save_name'] ) ||
@@ -239,20 +304,24 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					return;
 				}
 				?>
-            </div>
+			</div>
 			<?php
 		}
 
 		public function agy_settings_section_callback() {
-			echo '<p class="agy-desc">' . __( 'Set your General settings.', 'agy' ) . '</p>';
+			echo '<p class="agy-desc">' . __( 'Set your General settings.', AGY_TEXT_DOMAIN ) . '</p>';
 		}
 
 		public function agy_settings_section_tab2_callback() {
-			echo '<p class="agy-desc">' . __( 'Set content for verification.', 'agy' ) . '</p>';
+			echo '<p class="agy-desc">' . __( 'Set content for verification.', AGY_TEXT_DOMAIN ) . '</p>';
 		}
 
 		public function agy_settings_section_tab3_callback() {
-			echo '<p class="agy-desc">' . __( 'Set design for the verification.', 'agy' ) . '</p>';
+			echo '<p class="agy-desc">' . __( 'Set design for the verification.', AGY_TEXT_DOMAIN ) . '</p>';
+		}
+
+		public function agy_settings_section_tab4_callback() {
+			echo '<p class="agy-desc">' . __( 'Check the status log.', AGY_TEXT_DOMAIN ) . '</p>';
 		}
 
 		// Settings API
@@ -261,195 +330,200 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			register_setting( 'agy_settings_fields', 'agy_settings_fields', 'agy_sanitize_callback' );
 
 			// Adding sections
-			add_settings_section( 'agy_section_id', __( 'Configuration Settings', 'agy' ), array(
+			add_settings_section( 'agy_section_id', __( 'Configuration Settings', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_settings_section_callback'
 			), 'agy_settings_section_tab1' );
 
-			add_settings_section( 'agy_section_id', __( 'Content Settings', 'agy' ), array(
+			add_settings_section( 'agy_section_id', __( 'Content Settings', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_settings_section_tab2_callback'
 			), 'agy_settings_section_tab2' );
 
-			add_settings_section( 'agy_section_id', __( 'Design Settings', 'agy' ), array(
+			add_settings_section( 'agy_section_id', __( 'Design Settings', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_settings_section_tab3_callback'
 			), 'agy_settings_section_tab3' );
 
+			add_settings_section( 'agy_section_id', __( 'Status Log', AGY_TEXT_DOMAIN ), array(
+				$this,
+				'agy_settings_section_tab4_callback'
+			), 'agy_settings_section_tab4' );
+
 			// General page fields
-			add_settings_field( 'agy_section_id_enabled_disabled', __( 'Enable / Disable', 'agy' ), array(
+			add_settings_field( 'agy_section_id_enabled_disabled', __( 'Enable / Disable', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_enabled_disabled'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_unregister_user', __( 'Show for unregistered users only', 'agy' ), array(
+			add_settings_field( 'agy_section_id_unregister_user', __( 'Show for unregistered users only', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_unregister_user'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_debug_mode', __( 'Activate Debug mode', 'agy' ), array(
+			add_settings_field( 'agy_section_id_debug_mode', __( 'Activate Debug mode', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_debug_mode'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exclude_pages', __( 'Exclude pages', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exclude_pages', __( 'Exclude pages', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exclude_pages'
 			), 'agy_settings_section_tab1', 'agy_section_id' );
 
 			// Texts page fields
-			add_settings_field( 'agy_section_id_headline', __( 'Headline *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_headline', __( 'Headline *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_headline'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_subtitle', __( 'Subtitle *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_subtitle', __( 'Subtitle *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_subtitle'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_message', __( 'Message *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_message', __( 'Message *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_message'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_enter_btn', __( 'Enter Button Label *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_enter_btn', __( 'Enter Button Label *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_enter_btn'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn', __( 'Exit Button Label *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn', __( 'Exit Button Label *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL *', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_url', __( 'Exit URL *', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_url'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_separator_text', __( 'Separator Text', 'agy' ), array(
+			add_settings_field( 'agy_section_id_separator_text', __( 'Separator Text', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_separator_text'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_slogan', __( 'Slogan', 'agy' ), array(
+			add_settings_field( 'agy_section_id_slogan', __( 'Slogan', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_slogan'
 			), 'agy_settings_section_tab2', 'agy_section_id' );
 
 			// Design page fields
-			add_settings_field( 'agy_section_id_background_color', __( 'Background color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_background_color', __( 'Background color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_background_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_z_index', __( 'Z-Index ( Overlay )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_z_index', __( 'Z-Index ( Overlay )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_z_index'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_box_width', __( 'Content Box width ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_box_width', __( 'Content Box width ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_box_width'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_headline_color', __( 'Headline Color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_headline_color', __( 'Headline Color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_headline_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_headline_font_size', __( 'Headline Font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_headline_font_size', __( 'Headline Font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_headline_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_subtitle_color', __( 'Subtitle Color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_subtitle_color', __( 'Subtitle Color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_subtitle_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_subtitle_font_size', __( 'Subtitle Font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_subtitle_font_size', __( 'Subtitle Font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_subtitle_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_message_color', __( 'Message Color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_message_color', __( 'Message Color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_message_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_message_font_size', __( 'Message Font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_message_font_size', __( 'Message Font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_message_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_btn_background_color', __( 'Enter Button background color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_btn_background_color', __( 'Enter Button background color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_btn_background_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_btn_font_color', __( 'Enter Button font color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_btn_font_color', __( 'Enter Button font color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_btn_font_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_btn_border_style', __( 'Enter Button border style', 'agy' ), array(
+			add_settings_field( 'agy_section_id_btn_border_style', __( 'Enter Button border style', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_btn_border_style'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_btn_border_color', __( 'Enter Button border color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_btn_border_color', __( 'Enter Button border color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_btn_border_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_btn_font_size', __( 'Enter Button font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_btn_font_size', __( 'Enter Button font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_btn_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn_background_color', __( 'Exit Button background color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn_background_color', __( 'Exit Button background color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn_background_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn_font_color', __( 'Exit Button font color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn_font_color', __( 'Exit Button font color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn_font_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn_border_style', __( 'Exit Button border style', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn_border_style', __( 'Exit Button border style', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn_border_style'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn_border_color', __( 'Exit Button border color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn_border_color', __( 'Exit Button border color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn_border_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_exit_btn_font_size', __( 'Exit Button font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_exit_btn_font_size', __( 'Exit Button font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_exit_btn_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_separator_color', __( 'Separator Color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_separator_color', __( 'Separator Color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_separator_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_separator_font_size', __( 'Separator Font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_separator_font_size', __( 'Separator Font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_separator_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_slogan_color', __( 'Slogan Color', 'agy' ), array(
+			add_settings_field( 'agy_section_id_slogan_color', __( 'Slogan Color', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_slogan_color'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
 
-			add_settings_field( 'agy_section_id_slogan_font_size', __( 'Slogan Font size ( in px )', 'agy' ), array(
+			add_settings_field( 'agy_section_id_slogan_font_size', __( 'Slogan Font size ( in px )', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_section_id_slogan_font_size'
 			), 'agy_settings_section_tab3', 'agy_section_id' );
