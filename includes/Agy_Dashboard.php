@@ -225,62 +225,10 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 
 					<div id="agy-tab4" class="agy-tabcontent">
 						<?php
-						global $wpdb;
 						do_settings_sections( 'agy_settings_section_tab4' );
-						$wp_version          = get_bloginfo( 'version' );
-						$php_version         = phpversion();
-						$mysql_version       = $wpdb->db_version();
-						$debug_enabled       = WP_DEBUG ? 'true' : 'false';
-						$error_log           = ini_get( 'error_log' );
-						$latest_version      = defined( 'AGY_PLUGIN_VERSION' ) ? AGY_PLUGIN_VERSION : '';
-						$memory_limit        = ini_get( 'memory_limit' );
-						$upload_max_filesize = ini_get( 'upload_max_filesize' );
-						$post_max_size       = ini_get( 'post_max_size' );
-						$max_execution_time  = ini_get( 'max_execution_time' );
-						$max_input_time      = ini_get( 'max_input_time' );
-						$output              = '';
-						$output              .= '<h2>Site Status</h2>';
-						$output              .= '<ul>';
-						$output              .= '<li>WordPress Version: ' . $wp_version . ' (' . get_core_updates()['0']->response . ')</li>';
-						$output              .= '<li>PHP Version: ' . $php_version . '</li>';
-						$output              .= '<li>MySQL Version: ' . $mysql_version . '</li>';
-						$output              .= '<li>Debug Mode: ' . $debug_enabled . '</li>';
-						$output              .= '<li>PHP Error Log: ' . $error_log . '</li>';
-						$output              .= '<li>Plugin Version: ' . $latest_version . '</li>';
-						$output              .= '<li>PHP Memory Limit: ' . $memory_limit . '</li>';
-						$output              .= '<li>Upload File size Limit: ' . $upload_max_filesize . '</li>';
-						$output              .= '<li>Post max size Limit: ' . $post_max_size . '</li>';
-						$output              .= '<li>Max execution time Limit: ' . $max_execution_time . '</li>';
-						$output              .= '<li>Max input time Limit: ' . $max_input_time . '</li>';
-						$output              .= '</ul>';
-						$output              .= '<button type="button" class="button" onclick="copyToClipboard()">Copy to Clipboard</button>';
-						$output              .= '<div class="agy-copied-message">';
-						$output              = '<div id="site-status">' . $output . '</div>';
-						echo $output;
+						include AGY_PLUGIN_PATH . '/includes/templates/status-log.php';
 						?>
 					</div>
-
-					<script>
-					function copyToClipboard() {
-						var copyText = document.createElement("textarea");
-						copyText.value = document.querySelector("#site-status").innerHTML.trim()
-							.replace(/<\/li>/g, "\n").replace(/<li>/g, "")
-							.replace(/<\/h2>/g, "\n").replace(/<h2>/g, "")
-							.replace(/<\/ul>/g, "\n").replace(/<ul>/g, "")
-							.replace(/<\/div>/g, "\n").replace(/<div>/g, "")
-							.replace(/<\/button>/g, "\n").replace(/<button>/g, "");
-						document.body.appendChild(copyText);
-						copyText.select();
-						document.execCommand("copy");
-						document.body.removeChild(copyText);
-						var message = document.querySelector("div.agy-copied-message");
-						message.innerHTML = "Copied!";
-						// document.body.appendChild(message);
-						setTimeout(function () {
-							message.remove();
-						}, 2000);
-					}
-					</script>
 
 					<?php
 					submit_button(
@@ -345,7 +293,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 				'agy_settings_section_tab3_callback'
 			), 'agy_settings_section_tab3' );
 
-			add_settings_section( 'agy_section_id', __( 'Status Log', AGY_TEXT_DOMAIN ), array(
+			add_settings_section( 'agy_section_id', __( 'Plugin status', AGY_TEXT_DOMAIN ), array(
 				$this,
 				'agy_settings_section_tab4_callback'
 			), 'agy_settings_section_tab4' );
