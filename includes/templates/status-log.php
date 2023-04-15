@@ -12,10 +12,10 @@ function agy_if_update_available() {
 	) );
 	if ( version_compare( $plugin_data['Version'], $plugin_info->version, '<' ) ) {
 		// Update available
-		return '<span class="error-message">' . __( 'New version is available. Please update your plugin.', AGY_TEXT_DOMAIN ) . '</span>';
+		return '<span class="error-message">' . __( 'Update available.', AGY_TEXT_DOMAIN ) . '</span>';
 	} else {
 		// Up to date
-		return '<span>' . __( 'Agy is up to date.', AGY_TEXT_DOMAIN ) . '</span>';
+		return '<span>' . __( 'No update available.', AGY_TEXT_DOMAIN ) . '</span>';
 	}
 }
 
@@ -24,9 +24,9 @@ function agy_if_wp_update_available() {
 	$latest_version  = get_core_updates()['0']->current;
 
 	if ( version_compare( $current_version, $latest_version, '<' ) ) {
-		return '<span class="error-message">' . __( 'WordPress update is required', AGY_TEXT_DOMAIN ) . '</span>';
+		return '<span class="error-message">' . __( 'Update available', AGY_TEXT_DOMAIN ) . '</span>';
 	} else {
-		return '<span>' . __( 'WordPress is up to date', AGY_TEXT_DOMAIN ) . '</span>';
+		return '<span>' . __( 'No update available', AGY_TEXT_DOMAIN ) . '</span>';
 	}
 }
 
@@ -83,125 +83,155 @@ function get_latest_plugin_version( $plugin_name ) {
 }
 
 ?>
-	<button type="button" class="button button-small" onclick="copyToClipboard()">
+	<style>
+        .agy-status-container {
+            width: 60%;
+            height: 400px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            text-align: justify;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .agy-status-container::-webkit-scrollbar {
+            width: 3px;
+            background-color: transparent;
+        }
+
+        .agy-status-container::-webkit-scrollbar-thumb {
+            background-color: #e0061a;
+            border-radius: 20px;
+        }
+
+        button.agy-copy-clipboard {
+            margin: 0 0 20px 0!important;
+        }
+	</style>
+	<button type="button" class="button button-small agy-copy-clipboard" onclick="copyToClipboard()">
 		<?php _e( 'Copy to clipboard', AGY_TEXT_DOMAIN ) ?>
 	</button>
 
 	<div class="agy-copied-message"></div>
-	<h2><?php _e( 'General', AGY_TEXT_DOMAIN ) ?></h2>
-	<table class="agy-status-log">
-		<thead>
-		<th><?php _e( 'Condition', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Description', AGY_TEXT_DOMAIN ) ?></th>
-		</thead>
-		<tbody>
-		<tr>
-			<td><?php _e( 'Plugin Version', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php echo AGY_PLUGIN_VERSION ?></td>
-			<td><?php _e( agy_if_update_available() ) ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'WordPress version', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php echo get_bloginfo( 'version' ) ?></td>
-			<td><?php _e( agy_if_wp_update_available() ) ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'Debug log', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php echo WP_DEBUG ? 'ON' : 'OFF' ?></td>
-			<td><?php echo agy_if_debug_log() ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'PHP Version', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php echo phpversion() ?></td>
-			<td><?php _e( 'Current PHP version is ' . phpversion(), AGY_TEXT_DOMAIN ) ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'MySQL Version', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php echo $wpdb->db_version() ?></td>
-			<td><?php _e( 'Current MySQL version is ' . $wpdb->db_version(), AGY_TEXT_DOMAIN ) ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'Active plugins', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php _e( agy_active_plugins( true ) ) . _e( ' active plugins', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php _e( agy_active_plugins() ) ?></td>
-		</tr>
-		<tr>
-			<td><?php _e( 'Active themes', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php agy_themes( true ) . _e( ' active themes', AGY_TEXT_DOMAIN ) ?></td>
-			<td><?php agy_themes() ?></td>
-		</tr>
-		</tbody>
-	</table>
-	<h2><?php _e( 'Active plugins', AGY_TEXT_DOMAIN ) ?></h2>
-	<table class="agy-status-log">
-		<thead>
-		<th><?php _e( 'Name', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Version', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
-		</thead>
-		<tbody>
+	<div class="agy-status-container">
+		<div class="agy-status-wrapper">
+			<h2><?php _e( 'General', AGY_TEXT_DOMAIN ) ?></h2>
+			<table class="agy-status-log">
+				<thead>
+				<th><?php _e( 'Condition', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Description', AGY_TEXT_DOMAIN ) ?></th>
+				</thead>
+				<tbody>
+				<tr>
+					<td><?php _e( 'Plugin Version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo AGY_PLUGIN_VERSION ?></td>
+					<td><?php _e( agy_if_update_available() ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'WordPress version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo get_bloginfo( 'version' ) ?></td>
+					<td><?php _e( agy_if_wp_update_available() ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'Debug log', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo WP_DEBUG ? 'ON' : 'OFF' ?></td>
+					<td><?php echo agy_if_debug_log() ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'PHP Version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo phpversion() ?></td>
+					<td><?php _e( 'Current PHP version is ' . phpversion(), AGY_TEXT_DOMAIN ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'MySQL Version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo $wpdb->db_version() ?></td>
+					<td><?php _e( 'Current MySQL version is ' . $wpdb->db_version(), AGY_TEXT_DOMAIN ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'Active plugins', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php _e( agy_active_plugins( true ) ) . _e( ' active plugins', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php _e( agy_active_plugins() ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'Active themes', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php agy_themes( true ) . _e( ' active themes', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php agy_themes() ?></td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="agy-status-wrapper">
+			<h2><?php _e( 'Active plugins', AGY_TEXT_DOMAIN ) ?></h2>
+			<table class="agy-status-log">
+				<thead>
+				<th><?php _e( 'Name', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Version', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
+				</thead>
+				<tbody>
 
-		<?php
-		$all_plugins    = get_plugins();
-		$active_plugins = get_option( 'active_plugins' );
+				<?php
+				$all_plugins    = get_plugins();
+				$active_plugins = get_option( 'active_plugins' );
 
-		foreach ( $all_plugins as $plugin_path => $plugin_info ) {
-			if ( is_plugin_active( $plugin_path ) ) {
-				$plugin_data    = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
-				$latest_version = get_latest_plugin_version( $plugin_data['Name'] );
+				foreach ( $all_plugins as $plugin_path => $plugin_info ) {
+					if ( is_plugin_active( $plugin_path ) ) {
+						$plugin_data    = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
+						$latest_version = get_latest_plugin_version( $plugin_data['Name'] );
 
-				echo '<tr>';
-				echo '<td>' . $plugin_info['Name'] . '</td>';
-				echo '<td>' . $plugin_info['Version'] . '</td>';
+						echo '<tr>';
+						echo '<td>' . $plugin_info['Name'] . '</td>';
+						echo '<td>' . $plugin_info['Version'] . '</td>';
 
-				if ( version_compare( $latest_version, $plugin_data['Version'], '>' ) ) {
-					echo '<td class="error-message">Update available</td>';
-				} else {
-					echo '<td>No update available</td>';
+						if ( version_compare( $latest_version, $plugin_data['Version'], '>' ) ) {
+							echo '<td class="error-message">' . __( 'Update available', AGY_TEXT_DOMAIN ) . '</td>';
+						} else {
+							echo '<td>' . __( 'No update available', AGY_TEXT_DOMAIN ) . '</td>';
+						}
+
+						echo '</tr>';
+					}
 				}
+				?>
+				</tbody>
+			</table>
+		</div>
 
-				echo '</tr>';
-			}
-		}
-		?>
-		</tbody>
-	</table>
+		<div class="agy-status-wrapper">
+			<h2><?php _e( 'Active themes', AGY_TEXT_DOMAIN ) ?></h2>
+			<table class="agy-status-log">
+				<thead>
+				<th><?php _e( 'Name', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Version', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
+				</thead>
+				<tbody>
 
-	<h2><?php _e( 'Active themes', AGY_TEXT_DOMAIN ) ?></h2>
-	<table class="agy-status-log">
-		<thead>
-		<th><?php _e( 'Name', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Version', AGY_TEXT_DOMAIN ) ?></th>
-		<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
-		</thead>
-		<tbody>
+				<?php
+				$all_themes    = wp_get_themes();
+				$active_themes = get_option( 'stylesheet' );
 
-		<?php
-		$all_themes = wp_get_themes();
-		$active_themes = get_option( 'stylesheet' );
+				foreach ( $all_themes as $theme ) {
 
-		foreach ( $all_themes as $theme ) {
+					echo '<tr>';
+					echo '<td>' . $theme->get( 'Name' ) . '</td>';
+					echo '<td>' . $theme->get( 'Version' ) . '</td>';
 
-				echo '<tr>';
-				echo '<td>' . $theme->get('Name') . '</td>';
-				echo '<td>' . $theme->get('Version') . '</td>';
+					$theme_updates = get_theme_updates();
+					if ( isset( $theme_updates[ $theme->get_stylesheet() ] ) ) {
+						echo '<td class="error-message">Update available</td>';
+					} else {
+						echo '<td>No update available</td>';
+					}
 
-				$theme_updates = get_theme_updates();
-				if ( isset( $theme_updates[$theme->get_stylesheet()] ) ) {
-					echo '<td class="error-message">Update available</td>';
-				} else {
-					echo '<td>No update available</td>';
+					echo '</tr>';
 				}
-
-				echo '</tr>';
-
-		}
-
-
-		?>
-		</tbody>
-	</table>
+				?>
+				</tbody>
+			</table>
+		</div>
+	</div>
 <?php
 
 //$wp_version          = get_bloginfo( 'version' );

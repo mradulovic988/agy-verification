@@ -146,7 +146,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					      onclick="openTab(event, 'agy-tab2')"><?php _e( 'TEXT', AGY_TEXT_DOMAIN ) ?></span>
 					<span class="agy-tablinks"
 					      onclick="openTab(event, 'agy-tab3')"><?php _e( 'DESIGN', AGY_TEXT_DOMAIN ) ?></span>
-					<span class="agy-tablinks"
+					<span class="agy-tablinks agy-status-log-tab"
 					      onclick="openTab(event, 'agy-tab4')"><?php _e( 'STATUS LOG', AGY_TEXT_DOMAIN ) ?></span>
 				</div>
 				<div class="agy-tab-center">
