@@ -140,14 +140,14 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 			?>
 			<div class="agy-tab">
 				<div class="agy-tab-left">
-                <span id="agy-default-open" class="agy-tablinks"
-                      onclick="openTab(event, 'agy-tab1')"><?php _e( 'GENERAL', AGY_TEXT_DOMAIN ) ?></span>
+                    <span id="agy-default-open" class="agy-tablinks"
+                          onclick="openTab(event, 'agy-tab1')"><?php _e( 'General', AGY_TEXT_DOMAIN ) ?></span>
 					<span class="agy-tablinks"
-					      onclick="openTab(event, 'agy-tab2')"><?php _e( 'TEXT', AGY_TEXT_DOMAIN ) ?></span>
+					      onclick="openTab(event, 'agy-tab2')"><?php _e( 'Text', AGY_TEXT_DOMAIN ) ?></span>
 					<span class="agy-tablinks"
-					      onclick="openTab(event, 'agy-tab3')"><?php _e( 'DESIGN', AGY_TEXT_DOMAIN ) ?></span>
+					      onclick="openTab(event, 'agy-tab3')"><?php _e( 'Design', AGY_TEXT_DOMAIN ) ?></span>
 					<span class="agy-tablinks agy-status-log-tab"
-					      onclick="openTab(event, 'agy-tab4')"><?php _e( 'STATUS LOG', AGY_TEXT_DOMAIN ) ?></span>
+					      onclick="openTab(event, 'agy-tab4')"><?php _e( 'Status Log', AGY_TEXT_DOMAIN ) ?></span>
 				</div>
 				<div class="agy-tab-center">
 					<?php
@@ -175,6 +175,8 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 					?>
 				</div>
 				<div class="agy-tab-right">
+					<span
+						class="agy-version"><?php echo $this->agy_header_links( 'Case Study', 'https://mlab-studio.com', '_blank', 'agy-tablinks' ); ?></span>
 					<span
 						class="agy-version"><?php echo $this->agy_header_links( 'Give us 5 stars', 'https://wordpress.org/support/plugin/agy-verification/reviews/?filter=5#new-post', '_blank', 'agy-tablinks' ); ?></span>
 					<span
@@ -269,7 +271,7 @@ if ( ! class_exists( 'Agy_Dashboard' ) ) {
 		}
 
 		public function agy_settings_section_tab4_callback() {
-			echo '<p class="agy-desc">' . __( 'Check the status log.', AGY_TEXT_DOMAIN ) . '</p>';
+			echo '<p class="agy-desc">' . __( 'This section logs important system events and updates, helping administrators monitor the plugin\'s performance and troubleshoot issues.', AGY_TEXT_DOMAIN ) . '</p>';
 		}
 
 		// Settings API

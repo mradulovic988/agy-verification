@@ -2,6 +2,9 @@
 global $wpdb;
 require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
+$urlparts = parse_url( home_url() );
+$domain   = $urlparts['host'];
+
 function agy_if_update_available() {
 	$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/agy-verification/agy-verification.php' );
 
@@ -68,7 +71,7 @@ function agy_themes( $number = false ) {
 	}
 }
 
-function get_latest_plugin_version( $plugin_name ) {
+function agy_get_latest_plugin_version( $plugin_name ) {
 	$args     = array(
 		'slug'   => $plugin_name,
 		'fields' => array( 'version' ),
@@ -82,39 +85,57 @@ function get_latest_plugin_version( $plugin_name ) {
 	return $response->version;
 }
 
+function agy_if_ssl() {
+	if ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on' ) {
+		return '<span>' . __( 'Active SSL certificate', AGY_TEXT_DOMAIN ) . '</span>';
+	} else {
+		return '<span class="error-message">' . __( 'No active SSL certificate.', AGY_TEXT_DOMAIN ) . '</span>';
+	}
+}
 ?>
-	<style>
-        .agy-status-container {
-            width: 60%;
-            height: 400px;
-            overflow-y: auto;
-            overflow-x: hidden;
-            text-align: justify;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-
-        .agy-status-container::-webkit-scrollbar {
-            width: 3px;
-            background-color: transparent;
-        }
-
-        .agy-status-container::-webkit-scrollbar-thumb {
-            background-color: #e0061a;
-            border-radius: 20px;
-        }
-
-        button.agy-copy-clipboard {
-            margin: 0 0 20px 0!important;
-        }
-	</style>
-	<button type="button" class="button button-small agy-copy-clipboard" onclick="copyToClipboard()">
+	<button type="button" class="button button-small agy-copy-clipboard">
 		<?php _e( 'Copy to clipboard', AGY_TEXT_DOMAIN ) ?>
+	</button>
+
+	<button type="button" class="button button-small agy-download">
+		<?php _e( 'Download', AGY_TEXT_DOMAIN ) ?>
 	</button>
 
 	<div class="agy-copied-message"></div>
 	<div class="agy-status-container">
 		<div class="agy-status-wrapper">
+			<p><?php echo __( 'URL: ', AGY_TEXT_DOMAIN ) . $domain; ?></p>
+			<h2><?php _e( 'Server', AGY_TEXT_DOMAIN ) ?></h2>
+			<table class="agy-status-log">
+				<thead>
+				<th><?php _e( 'Condition', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Status', AGY_TEXT_DOMAIN ) ?></th>
+				<th><?php _e( 'Description', AGY_TEXT_DOMAIN ) ?></th>
+				</thead>
+				<tbody>
+				<tr>
+					<td><?php _e( 'PHP Version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo phpversion() ?></td>
+					<td><?php _e( 'Current PHP version is ' . phpversion(), AGY_TEXT_DOMAIN ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'MySQL Version', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo $wpdb->db_version() ?></td>
+					<td><?php _e( 'Current MySQL version is ' . $wpdb->db_version(), AGY_TEXT_DOMAIN ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'Server Software', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo $_SERVER['SERVER_SOFTWARE']; ?></td>
+					<td><?php _e( 'Current web server is ' . $_SERVER['SERVER_SOFTWARE'], AGY_TEXT_DOMAIN ) ?></td>
+				</tr>
+				<tr>
+					<td><?php _e( 'SSL certificate', AGY_TEXT_DOMAIN ) ?></td>
+					<td><?php echo agy_if_ssl(); ?></td>
+					<td></td>
+				</tr>
+				</tbody>
+			</table>
+
 			<h2><?php _e( 'General', AGY_TEXT_DOMAIN ) ?></h2>
 			<table class="agy-status-log">
 				<thead>
@@ -137,16 +158,6 @@ function get_latest_plugin_version( $plugin_name ) {
 					<td><?php _e( 'Debug log', AGY_TEXT_DOMAIN ) ?></td>
 					<td><?php echo WP_DEBUG ? 'ON' : 'OFF' ?></td>
 					<td><?php echo agy_if_debug_log() ?></td>
-				</tr>
-				<tr>
-					<td><?php _e( 'PHP Version', AGY_TEXT_DOMAIN ) ?></td>
-					<td><?php echo phpversion() ?></td>
-					<td><?php _e( 'Current PHP version is ' . phpversion(), AGY_TEXT_DOMAIN ) ?></td>
-				</tr>
-				<tr>
-					<td><?php _e( 'MySQL Version', AGY_TEXT_DOMAIN ) ?></td>
-					<td><?php echo $wpdb->db_version() ?></td>
-					<td><?php _e( 'Current MySQL version is ' . $wpdb->db_version(), AGY_TEXT_DOMAIN ) ?></td>
 				</tr>
 				<tr>
 					<td><?php _e( 'Active plugins', AGY_TEXT_DOMAIN ) ?></td>
@@ -178,7 +189,7 @@ function get_latest_plugin_version( $plugin_name ) {
 				foreach ( $all_plugins as $plugin_path => $plugin_info ) {
 					if ( is_plugin_active( $plugin_path ) ) {
 						$plugin_data    = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_path );
-						$latest_version = get_latest_plugin_version( $plugin_data['Name'] );
+						$latest_version = agy_get_latest_plugin_version( $plugin_data['Name'] );
 
 						echo '<tr>';
 						echo '<td>' . $plugin_info['Name'] . '</td>';
@@ -267,24 +278,6 @@ function get_latest_plugin_version( $plugin_name ) {
 
 ?>
 	<script>
-			function copyToClipboard() {
-				var copyText = document.createElement("textarea");
-				copyText.value = document.querySelector("#site-status").innerHTML.trim()
-					.replace(/<\/li>/g, "\n").replace(/<li>/g, "")
-					.replace(/<\/h2>/g, "\n").replace(/<h2>/g, "")
-					.replace(/<\/ul>/g, "\n").replace(/<ul>/g, "")
-					.replace(/<\/div>/g, "\n").replace(/<div>/g, "")
-					.replace(/<\/button>/g, "\n").replace(/<button>/g, "");
-				document.body.appendChild(copyText);
-				copyText.select();
-				document.execCommand("copy");
-				document.body.removeChild(copyText);
-				var message = document.querySelector("div.agy-copied-message");
-				message.innerHTML = "Copied!";
-				// document.body.appendChild(message);
-				setTimeout(function () {
-					message.remove();
-				}, 2000);
-			}
+
 	</script>
 <?php
