@@ -92,6 +92,7 @@ function agy_if_ssl() {
 		return '<span class="error-message">' . __( 'No active SSL certificate.', AGY_TEXT_DOMAIN ) . '</span>';
 	}
 }
+
 ?>
 	<button type="button" class="button button-small agy-copy-clipboard">
 		<?php _e( 'Copy to clipboard', AGY_TEXT_DOMAIN ) ?>

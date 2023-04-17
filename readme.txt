@@ -117,6 +117,9 @@ Yes! You can use Agy Verification for any restriction that you need.
 * Changed \Agy class to final class
 * Added support for WooCommerce
 * Moved text domain to constant
+* Added Status log
+* Export Status log
+* Copy Status log
 
 
 = [ 1.1.7 ] - 2023.15.01 =
