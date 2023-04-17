@@ -11,7 +11,7 @@
  * Plugin Name:       Agy Verification
  * Plugin URI:        https://wordpress.org/plugins/agy-verification
  * Description:       Agy Verification is a powerful solution to add any kind of verification restriction on your website. Easy to setup, optimized for all devices, and modern design option to match your style.
- * Version:           1.1.8
+ * Version:           1.2.0
  * Requires at least: 5.6
  * Requires PHP:      7.4
  * Author:            Marko Radulovic
@@ -42,7 +42,7 @@ if ( ! class_exists( 'Agy' ) ) {
 			}
 
 			if ( ! defined( 'AGY_PLUGIN_VERSION' ) ) {
-				define( 'AGY_PLUGIN_VERSION', '1.1.8' );
+				define( 'AGY_PLUGIN_VERSION', '1.2.0' );
 			}
 
 			if ( ! defined( 'AGY_PLUGIN_BASENAME' ) ) {
